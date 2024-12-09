@@ -4,6 +4,7 @@ import { FaFacebook, FaPinterest, FaTwitter, FaYoutube } from "react-icons/fa";
 import { RxInstagramLogo } from "react-icons/rx";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const socialIcons = [
   { Icon: FaFacebook },
@@ -38,7 +39,7 @@ const Footer = () => {
         <div className="w-full py-10 md:py-20 border-y-[1px]  border-gray-300 flex justify-center items-start">
           <div className="w-[95%] lg:w-[80%] md:w-[85%] flex flex-col lg:flex-row justify-between gap-10 items-start h-auto">
             <div className="flex flex-col gap-5 w-full lg:w-auto items-center lg:items-start">
-              <div className="flex items-center space-x-2">
+              <Link href="/" className="flex items-center space-x-2   hover:scale-105 duration-300 ease-in-out cursor-pointer">
                 <Image
                   src="/homepage/sofa_logo.png"
                   alt="sofa-logo"
@@ -46,7 +47,7 @@ const Footer = () => {
                   height={45}
                 />
                 <h1 className="text-2xl font-semibold">Comforty</h1>
-              </div>
+              </Link>
               <p className="text-gray-600 text-center md:text-left">
                 Vivamus tristique odio sit amet velit semper, <br /> eu posuere
                 turpis interdum. Cras egestas purus.
@@ -55,9 +56,9 @@ const Footer = () => {
                 {socialIcons.map(({ Icon }, index) => (
                   <div
                     key={index}
-                    className="group relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 text-black transition-all duration-300"
+                    className="  hover:scale-110 duration-300 ease-in-out cursor-pointer group relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 text-black transition-all "
                   >
-                    <Icon className="group-hover:text-second text-xl" />
+                    <Icon className="group-hover:text-second text-xl " />
                     <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-second transition-all duration-300 cursor-pointer"></div>
                   </div>
                 ))}
@@ -75,7 +76,7 @@ const Footer = () => {
                 {section.items.map((item, idx) => (
                   <p
                     key={idx}
-                    className="text-black cursor-pointer hover:text-second hover:underline underline-offset-4"
+                    className="text-black   hover:scale-105 duration-300 ease-in-out cursor-pointer  hover:text-second hover:underline underline-offset-4"
                   >
                     {item}
                   </p>

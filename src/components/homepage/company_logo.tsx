@@ -21,7 +21,7 @@ const CompanyLogos = () => {
             alt={image.name}
             width={80}
             height={80}
-            className="object-contain"
+            className="object-contain hover:scale-110 duration-300 ease-in-out cursor-pointer"
           />
         ))}
       </div>

@@ -41,7 +41,7 @@ const FeatureProducts = () => {
       <div className="w-[85%] mx-auto  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-7">
         {products.map((product) => (
           <div key={product.id} className="flex flex-col">
-            <div className="relative flex justify-center items-center w-full h-64 object-center rounded-lg">
+            <div className="hover:scale-105 duration-300 ease-in-out cursor-pointer relative flex justify-center items-center w-full h-64 object-center rounded-lg">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -74,8 +74,8 @@ const FeatureProducts = () => {
                 </p>
               </div>
               <div>
-                <Button className="w-full text-black hover:text-white hover:bg-second bg-third font-medium">
-                  <ShoppingCart className="scale-125" strokeWidth={1.25} />
+                <Button className=" w-full text-black hover:text-white hover:bg-second bg-third font-medium">
+                  <ShoppingCart className="scale-125 " strokeWidth={1.25} />
                 </Button>
               </div>
             </div>

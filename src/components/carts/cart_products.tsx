@@ -83,7 +83,7 @@ const CartProducts = () => {
               <p>Total</p>
               <p>$198.00</p>
             </div>
-            <div className="w-full mt-2">
+            <div className="w-full mt-2   hover:scale-105 duration-300 ease-in-out cursor-pointer">
               <Button className="w-full py-7 rounded-3xl cursor-pointer text-white bg-second hover:bg-hover">
                 Member Checkout
               </Button>

@@ -23,8 +23,12 @@ const NavHeader = () => {
             <SheetContent className="space-y-8" side="left">
               <nav>
                 {links.map((link) => (
-                  <Link href={link.href} key={link.name}>
-                    <p className="py-5 text-lg font-medium hover:text-second cursor-pointer">
+                  <Link
+                    className="hover:scale-110 duration-300 ease-in cursor-pointer"
+                    href={link.href}
+                    key={link.name}
+                  >
+                    <p className=" py-5 text-lg font-medium hover:text-second cursor-pointer">
                       {link.name}
                     </p>
                   </Link>
@@ -37,7 +41,11 @@ const NavHeader = () => {
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8">
           {links.map((link) => (
-            <Link href={link.href} key={link.name}>
+            <Link
+              className="hover:scale-110 duration-300 ease-in cursor-pointer"
+              href={link.href}
+              key={link.name}
+            >
               <p className="text-fourth font-medium hover:text-second cursor-pointer">
                 {link.name}
               </p>
@@ -46,7 +54,10 @@ const NavHeader = () => {
         </nav>
 
         <div className="flex items-center space-x-2">
-          <Link href="/contact">
+          <Link
+            className="hover:scale-105 duration-300 ease-in-out cursor-pointer"
+            href="/contact"
+          >
             <span className="text-fourth hover:text-second cursor-pointer">
               Contact:
             </span>

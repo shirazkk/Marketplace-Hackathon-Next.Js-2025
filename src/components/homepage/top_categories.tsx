@@ -33,7 +33,7 @@ const TopCategories = () => {
         {products.map((product) => (
           <div key={product.id}>
             <div className="flex flex-col">
-              <div className="pr-10 relative flex justify-center items-center w-full h-full object-center rounded-lg bg-second1 group">
+              <div className="hover:scale-105 duration-300 ease-in-out cursor-pointer pr-10 relative flex justify-center items-center w-full h-full object-center rounded-lg bg-second1 group">
                 <Image
                   src={product.image}
                   alt={product.name}

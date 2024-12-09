@@ -47,7 +47,7 @@ const Brand = () => {
         {BrandData.map((item) => (
           <div
             key={item.id}
-            className="w-[309px] h-[244px] text-second flex flex-col justify-start items-start gap-3 bg-gray-100 p-6 rounded shadow-md mx-auto"
+            className="hover:scale-105 duration-300 ease-in-out cursor-pointer w-[309px] h-[244px] text-second flex flex-col justify-start items-start gap-3 bg-gray-100 p-6 rounded shadow-md mx-auto"
           >
             <div className="text-primary">{item.icon}</div>
             <h1 className="text-lg font-semibold">{item.title}</h1>

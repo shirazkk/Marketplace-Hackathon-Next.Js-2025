@@ -27,7 +27,7 @@ export default function NewsletterAndInstagram() {
             />
             <Button
               variant="link"
-              className="text-black px-4 py-2 focus:outline-none"
+              className="text-black px-4 py-2 focus:outline-none   hover:scale-105 duration-300 ease-in-out cursor-pointer"
             >
               SUBMIT
             </Button>
@@ -40,7 +40,10 @@ export default function NewsletterAndInstagram() {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
             {instagramImages.map((image) => (
-              <div key={image.id} className="overflow-hidden">
+              <div
+                key={image.id}
+                className="overflow-hidden hover:scale-105 duration-300 ease-in-out cursor-pointer"
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}

@@ -15,13 +15,12 @@ const Hero = () => {
             Best Furniture Collection For Your Interior.
           </h1>
           <div className="flex justify-center md:justify-start">
-            <Button className="bg-second py-4 px-6 hover:bg-hover text-white flex items-center">
+            <Button className="bg-second hover:scale-105 duration-300 ease-in-out cursor-pointer py-6 px-7 hover:bg-hover text-white flex items-center">
               Shop Now
               <ArrowRight className="ml-2" color="white" strokeWidth={1.25} />
             </Button>
           </div>
         </div>
-
         {/* Right Side */}
         <div className="flex justify-center md:justify-end w-full md:w-[40%]">
           <Image

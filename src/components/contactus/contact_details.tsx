@@ -83,7 +83,7 @@ const ContactUs = () => {
             placeholder="Hi! I’d like to ask about..."
             className="border-2 border-gray-200 px-7 py-4 rounded-md w-full  h-36 resize-none"
           />
-          <Button className="w-[190px] mx-auto md:mx-0  h-12 text-white font-semibold bg-second hover:bg-hover text-center rounded-md mt-4">
+          <Button className="hover:scale-105 duration-300 ease-in-out cursor-pointer w-[190px] mx-auto md:mx-0  h-12 text-white font-semibold bg-second hover:bg-hover text-center rounded-md mt-4">
             Submit
           </Button>
         </div>

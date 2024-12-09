@@ -70,7 +70,7 @@ const OurProducts = () => {
             className="flex flex-col  justify-center items-center text-center max-w-[250px]"
           >
             {/* Product Image Section */}
-            <div className="relative flex justify-center  items-center w-64 h-64 object-center rounded-lg ">
+            <div className="hover:scale-105 duration-300 ease-in-out cursor-pointer relative flex justify-center  items-center w-64 h-64 object-center rounded-lg ">
               <Image
                 src={product.image}
                 alt={product.name}

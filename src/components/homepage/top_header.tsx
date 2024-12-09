@@ -15,14 +15,14 @@ const TopHeader = () => {
         {/* Right Side */}
         <div className="flex items-center space-x-4">
           <select className="bg-transparent rounded p-1 focus:outline-none cursor-pointer">
-            <option className="bg-transparent" value="en">
+            <option className="bg-black" value="en">
               Eng
             </option>
-            <option className="bg-transparent" value="ur">
+            <option className="bg-black" value="ur">
               Urdu
             </option>
           </select>
-          <div className=" cursor-pointer">
+          <div className=" cursor-pointer ">
             <Link href="/faq">Faqs</Link>
           </div>
           <div className="flex items-center space-x-1 cursor-pointer">

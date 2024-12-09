@@ -18,7 +18,7 @@ const AboutDetails = () => {
           </p>
         </div>
         <div>
-          <Button className="bg-second hover:bg-hover text-white px-4 sm:px-3 py-4 sm:py-3 mt-3 rounded-none">
+          <Button className="bg-second hover:bg-hover text-white px-5  py-6  mt-3 rounded-none hover:scale-105 duration-300 ease-in-out cursor-pointer">
             View Collection
           </Button>
         </div>

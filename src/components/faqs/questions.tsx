@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/accordion";
 
 const Question = () => {
-
   const questions = [
     {
       id: 1,
@@ -61,7 +60,10 @@ const Question = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 w-[95%] lg:w-[90%] xl:w-[80%] mx-auto gap-6 p-2 md:p-4">
         {questions.map((item) => (
-          <div key={item.id} className="bg-question  p-2 md:p-4 shadow-md rounded-lg">
+          <div
+            key={item.id}
+            className="bg-question  p-2 md:p-4 shadow-md rounded-lg"
+          >
             <Accordion type="single" collapsible>
               <AccordionItem value={`item-${item.id}`}>
                 <AccordionTrigger className="text-lg font-semibold">

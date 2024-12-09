@@ -1,5 +1,5 @@
 import React from "react";
-import {ShoppingCart} from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 
@@ -9,25 +9,25 @@ const FeatureProducts = () => {
       id: 1,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-6.png",
+      image: "/homepage/image_6.png",
     },
     {
       id: 2,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-7.png",
+      image: "/homepage/image_7.png",
     },
     {
       id: 3,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-8.png",
+      image: "/homepage/image_8.png",
     },
     {
       id: 4,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-9.png",
+      image: "/homepage/image_9.png",
     },
   ];
 

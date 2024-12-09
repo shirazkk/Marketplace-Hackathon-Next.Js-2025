@@ -9,25 +9,25 @@ const OurProducts = () => {
       id: 1,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-6.png",
+      image: "/homepage/image_6.png",
     },
     {
       id: 2,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-7.png",
+      image: "/homepage/image_7.png",
     },
     {
       id: 3,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-8.png",
+      image: "/homepage/image_8.png",
     },
     {
       id: 4,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-9.png",
+      image: "/homepage/image_9.png",
     },
     {
       id: 5,
@@ -39,19 +39,19 @@ const OurProducts = () => {
       id: 6,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-1.png",
+      image: "/homepage/image_1.png",
     },
     {
       id: 7,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-2.png",
+      image: "/homepage/image_2.png",
     },
     {
       id: 8,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image-6.png",
+      image: "/homepage/image_6.png",
     },
   ];
 

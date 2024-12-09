@@ -4,18 +4,17 @@ import { Button } from "../ui/button";
 
 export default function NewsletterAndInstagram() {
   const instagramImages = [
-    { id: 1, src: "/homepage/image-4.png", alt: "Chair 1" },
+    { id: 1, src: "/homepage/image_4.png", alt: "Chair 1" },
     { id: 2, src: "/homepage/image.png", alt: "Chair 2" },
-    { id: 3, src: "/homepage/image-7.png", alt: "Chair 3" },
-    { id: 4, src: "/homepage/image-6.png", alt: "Chair 4" },
-    { id: 5, src: "/homepage/image-8.png", alt: "Chair 5" },
-    { id: 5, src: "/homepage/image-5.png", alt: "Chair 5" },
+    { id: 3, src: "/homepage/image_7.png", alt: "Chair 3" },
+    { id: 4, src: "/homepage/image_6.png", alt: "Chair 4" },
+    { id: 5, src: "/homepage/image_8.png", alt: "Chair 5" },
+    { id: 5, src: "/homepage/image_5.png", alt: "Chair 5" },
   ];
 
   return (
     <div className="bg-third py-20 mt-20">
       <div className="max-w-[1500px] mx-auto px-4">
-        {/* Newsletter Section */}
         <div className="max-w-4xl mx-auto text-center mb-10 px-4">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4">
             Or Subscribe To The Newsletter
@@ -35,7 +34,6 @@ export default function NewsletterAndInstagram() {
           </div>
         </div>
 
-        {/* Instagram Section */}
         <div className="w-full md:w-[90%] mx-auto text-center px-4">
           <h2 className="text-3xl md:text-5xl font-semibold mb-10">
             Follow Products And Discounts On Instagram

@@ -19,7 +19,7 @@ const PopularProducts = () => {
       id: 3,
       name: "The Dandy chair",
       price: "$99.00",
-      image: "/homepage/image-8.png",
+      image: "/homepage/image_8.png",
     },
   ];
 

@@ -12,7 +12,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-6.png",
+      image: "/homepage/image_6.png",
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-7.png",
+      image: "/homepage/image_7.png",
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-8.png",
+      image: "/homepage/image_8.png",
     },
     {
       id: 4,
@@ -39,7 +39,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-9.png",
+      image: "/homepage/image_9.png",
     },
     {
       id: 5,
@@ -48,7 +48,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-4.png",
+      image: "/homepage/image_4.png",
     },
     {
       id: 6,
@@ -57,7 +57,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-1.png",
+      image: "/homepage/image_1.png",
     },
     {
       id: 7,
@@ -66,7 +66,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-2.png",
+      image: "/homepage/image_2.png",
     },
     {
       id: 8,
@@ -75,7 +75,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-6.png",
+      image: "/homepage/image_6.png",
     },
     {
       id: 9,
@@ -93,7 +93,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-7.png",
+      image: "/homepage/image_7.png",
     },
     {
       id: 11,
@@ -102,7 +102,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-8.png",
+      image: "/homepage/image_8.png",
     },
     {
       id: 12,
@@ -111,7 +111,7 @@ const AllProducts = () => {
         price1: "$20",
         price2: "$30",
       },
-      image: "/homepage/image-5.png",
+      image: "/homepage/image_5.png",
     },
   ];
 

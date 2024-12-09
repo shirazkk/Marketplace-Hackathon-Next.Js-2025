@@ -1,7 +1,6 @@
-// components/TopHeader.js
 import Link from "next/link";
 import { CiCircleAlert } from "react-icons/ci";
-import { FaCheck} from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 
 const TopHeader = () => {
   return (

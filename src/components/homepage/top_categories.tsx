@@ -13,13 +13,13 @@ const TopCategories = () => {
       id: 2,
       name: "Wooden Chair",
       qunatity: "157 Products",
-      image: "/homepage/image-4.png",
+      image: "/homepage/image_4.png",
     },
     {
       id: 3,
       name: "Desk Chair",
       qunatity: "154 Products",
-      image: "/homepage/image-5.png",
+      image: "/homepage/image_5.png",
     },
   ];
 

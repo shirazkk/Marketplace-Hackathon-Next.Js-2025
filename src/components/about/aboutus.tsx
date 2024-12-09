@@ -5,7 +5,6 @@ import Image from "next/image";
 const AboutDetails = () => {
   return (
     <div className="2xl:w-[70%] xl:w-[80%] lg:w-[90%] md:w-[95%] sm:w-full mt-24 h-auto lg:h-[478px] flex flex-col lg:flex-row justify-center gap-5 items-center mx-auto max-w-[1500px] px-4">
-      {/* Text Section */}
       <div className="bg-about 2xl:w-[50%] xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-full h-auto lg:h-full px-6 sm:px-4 py-10 lg:py-14 flex justify-between flex-col">
         <div className="w-full lg:w-[495px] text-white space-y-4">
           <h1 className="font-semibold text-2xl lg:text-3xl">
@@ -25,10 +24,9 @@ const AboutDetails = () => {
         </div>
       </div>
 
-      {/* Image Section */}
       <div className="2xl:w-[50%] xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-full w-full h-[300px] lg:h-full">
         <Image
-          src="/homepage/image-6.png"
+          src="/homepage/image_6.png"
           alt="About Comforty"
           width="1920"
           height="1080"

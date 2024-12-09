@@ -13,7 +13,7 @@ const NavHeader = () => {
 
   return (
     <header className="py-5 px-4 border-b-2 bg-white shadow-sm">
-      <div className=" w-full md:w-[80%] lg:w-[70%] mx-auto flex justify-between items-center max-w-[1500px]">
+      <div className="w-full md:w-[80%] lg:w-[70%] mx-auto flex justify-between items-center max-w-[1500px]">
         {/* Mobile Menu */}
         <div className="md:hidden block">
           <Sheet>
@@ -21,10 +21,10 @@ const NavHeader = () => {
               <Menu className="w-6 h-6 text-black" />
             </SheetTrigger>
             <SheetContent className="space-y-8" side="left">
-              <nav className="mt-4 pt-5">
+              <nav>
                 {links.map((link) => (
-                  <Link className="" href={link.href} key={link.name}>
-                    <p className="text-lg font-medium hover:text-second cursor-pointer">
+                  <Link href={link.href} key={link.name}>
+                    <p className="py-5 text-lg font-medium hover:text-second cursor-pointer">
                       {link.name}
                     </p>
                   </Link>
@@ -45,7 +45,6 @@ const NavHeader = () => {
           ))}
         </nav>
 
-        {/* Contact*/}
         <div className="flex items-center space-x-2">
           <Link href="/contact">
             <span className="text-fourth hover:text-second cursor-pointer">

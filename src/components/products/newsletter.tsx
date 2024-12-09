@@ -4,12 +4,12 @@ import { Button } from "../ui/button";
 
 export default function NewsletterAndInstagram() {
   const instagramImages = [
-    { id: 1, src: "/homepage/image_4.png", alt: "Chair 1" },
-    { id: 2, src: "/homepage/image.png", alt: "Chair 2" },
-    { id: 3, src: "/homepage/image_7.png", alt: "Chair 3" },
-    { id: 4, src: "/homepage/image_6.png", alt: "Chair 4" },
-    { id: 5, src: "/homepage/image_8.png", alt: "Chair 5" },
-    { id: 5, src: "/homepage/image_5.png", alt: "Chair 5" },
+    { id: 1, src: "/homepage/chair5.png", alt: "Chair 1" },
+    { id: 2, src: "/homepage/chair1.png", alt: "Chair 2" },
+    { id: 3, src: "/homepage/chair8.png", alt: "Chair 3" },
+    { id: 4, src: "/homepage/chair7.png", alt: "Chair 4" },
+    { id: 5, src: "/homepage/chair9.png", alt: "Chair 5" },
+    { id: 5, src: "/homepage/chair6.png", alt: "Chair 5" },
   ];
 
   return (

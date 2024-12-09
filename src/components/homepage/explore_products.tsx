@@ -4,31 +4,31 @@ export default function ExploreProducts() {
   const images = [
     {
       id: 1,
-      src: "/homepage/image_8.png",
+      src: "/homepage/chair9.png",
       alt: "Placeholder",
       colSpan: "md:col-span-2 lg:row-span-2 lg:col-span-2",
     },
     {
       id: 2,
-      src: "/homepage/image_9.png",
+      src: "/homepage/chair10.png",
       alt: "Placeholder",
       colSpan: "md:col-span-1",
     },
     {
       id: 3,
-      src: "/homepage/image_6.png",
+      src: "/homepage/chair7.png",
       alt: "Placeholder",
       colSpan: "md:col-span-1",
     },
     {
       id: 4,
-      src: "/homepage/image_1.png",
+      src: "/homepage/chair2.png",
       alt: "Placeholder",
       colSpan: "md:col-span-1",
     },
     {
       id: 5,
-      src: "/homepage/image_6.png",
+      src: "/homepage/chair7.png",
       alt: "Placeholder",
       colSpan: "md:col-span-1",
     },

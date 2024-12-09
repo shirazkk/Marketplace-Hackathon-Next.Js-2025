@@ -7,19 +7,19 @@ const TopCategories = () => {
       id: 1,
       name: "Wing Chair",
       qunatity: "3,584 Products",
-      image: "/homepage/image.png",
+      image: "/homepage/chair1.png",
     },
     {
       id: 2,
       name: "Wooden Chair",
       qunatity: "157 Products",
-      image: "/homepage/image_4.png",
+      image: "/homepage/chair5.png",
     },
     {
       id: 3,
       name: "Desk Chair",
       qunatity: "154 Products",
-      image: "/homepage/image_5.png",
+      image: "/homepage/chair6.png",
     },
   ];
 

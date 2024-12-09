@@ -9,25 +9,25 @@ const FeatureProducts = () => {
       id: 1,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image_6.png",
+      image: "/homepage/chair7.png",
     },
     {
       id: 2,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image_7.png",
+      image: "/homepage/chair8.png",
     },
     {
       id: 3,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image_8.png",
+      image: "/homepage/chair9.png",
     },
     {
       id: 4,
       name: "Library Stool Chair",
       price: "$20",
-      image: "/homepage/image_9.png",
+      image: "/homepage/chair10.png",
     },
   ];
 

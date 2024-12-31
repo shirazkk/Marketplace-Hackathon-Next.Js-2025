@@ -1,36 +1,10 @@
-import React from "react";
+"use client";
 import Image from "next/image";
 import { FaFacebook, FaPinterest, FaTwitter, FaYoutube } from "react-icons/fa";
 import { RxInstagramLogo } from "react-icons/rx";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
-
-const socialIcons = [
-  { Icon: FaFacebook },
-  { Icon: FaTwitter },
-  { Icon: RxInstagramLogo },
-  { Icon: FaPinterest },
-  { Icon: FaYoutube },
-];
-
-const footerSections = [
-  {
-    title: "Category",
-    items: [
-      "Sofa",
-      "Armchair",
-      "Wing Chair",
-      "Desk Chair",
-      "Wooden Chair",
-      "Park Bench",
-    ],
-  },
-  {
-    title: "Support",
-    items: ["Help & Support", "Terms & Condition", "Privacy Policy", "Help"],
-  },
-];
 
 const Footer = () => {
   return (
@@ -39,7 +13,10 @@ const Footer = () => {
         <div className="w-full py-10 md:py-20 border-y-[1px]  border-gray-300 flex justify-center items-start">
           <div className="w-[95%] lg:w-[80%] md:w-[85%] flex flex-col lg:flex-row justify-between gap-10 items-start h-auto">
             <div className="flex flex-col gap-5 w-full lg:w-auto items-center lg:items-start">
-              <Link href="/" className="flex items-center space-x-2   hover:scale-105 duration-300 ease-in-out cursor-pointer">
+              <Link
+                href="/"
+                className="flex items-center space-x-2 hover:scale-105 duration-300 ease-in-out cursor-pointer"
+              >
                 <Image
                   src="/homepage/sofa_logo.png"
                   alt="sofa-logo"
@@ -53,22 +30,49 @@ const Footer = () => {
                 turpis interdum. Cras egestas purus.
               </p>
               <div className="flex gap-3 justify-center md:justify-start mt-2">
-                {socialIcons.map(({ Icon }, index) => (
+                {[
+                  { Icon: FaFacebook },
+                  { Icon: FaTwitter },
+                  { Icon: RxInstagramLogo },
+                  { Icon: FaPinterest },
+                  { Icon: FaYoutube },
+                ].map(({ Icon }, index) => (
                   <div
                     key={index}
-                    className="  hover:scale-110 duration-300 ease-in-out cursor-pointer group relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 text-black transition-all "
+                    className="hover:scale-110 duration-300 ease-in-out cursor-pointer group relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 text-black transition-all"
                   >
-                    <Icon className="group-hover:text-second text-xl " />
+                    <Icon className="group-hover:text-second text-xl" />
                     <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-second transition-all duration-300 cursor-pointer"></div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {footerSections.map((section, index) => (
+            {[
+              {
+                title: "Category",
+                items: [
+                  "Sofa",
+                  "Armchair",
+                  "Wing Chair",
+                  "Desk Chair",
+                  "Wooden Chair",
+                  "Park Bench",
+                ],
+              },
+              {
+                title: "Support",
+                items: [
+                  "Help & Support",
+                  "Terms & Condition",
+                  "Privacy Policy",
+                  "Help",
+                ],
+              },
+            ].map((section, index) => (
               <div
                 key={index}
-                className="flex flex-col gap-3 w-full lg:w-[150px]  items-center lg:items-start"
+                className="flex flex-col gap-3 w-full lg:w-[150px] items-center lg:items-start"
               >
                 <h1 className="uppercase text-fourth font-semibold">
                   {section.title}
@@ -76,7 +80,7 @@ const Footer = () => {
                 {section.items.map((item, idx) => (
                   <p
                     key={idx}
-                    className="text-black   hover:scale-105 duration-300 ease-in-out cursor-pointer  hover:text-second hover:underline underline-offset-4"
+                    className="text-black hover:scale-105 duration-300 ease-in-out cursor-pointer hover:text-second hover:underline underline-offset-4"
                   >
                     {item}
                   </p>
@@ -98,6 +102,7 @@ const Footer = () => {
                   Subscribe
                 </Button>
               </div>
+
               <p className="text-sm text-gray-600 text-center md:text-left">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />{" "}
                 Nullam tincidunt erat enim.

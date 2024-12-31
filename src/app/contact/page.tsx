@@ -1,11 +1,13 @@
 import Acheivements from "@/components/contactus/accheviements";
-import ContactDetails from "@/components/contactus/contact_details";
+import ContactUs from "@/components/contactus/contact_details";
+// import ContactDetails from "@/components/contactus/contact_details";
 import React from "react";
 
 const Contact = () => {
   return (
     <div>
-      <ContactDetails />
+      <ContactUs/>
+      {/* <ContactDetails /> */}
       <Acheivements />
     </div>
   );

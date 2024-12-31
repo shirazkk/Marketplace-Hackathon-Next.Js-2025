@@ -10,11 +10,9 @@ const Pages = () => {
           <FaBookReader className="text-6xl text-blue-600" />
         </div>
         <div className="text-4xl font-bold text-gray-800 mb-4">
-          Our Pages Will Be Coming Soon!
+           There Is no pages
         </div>
-        <p className="text-gray-600 text-lg">
-          We&apos;re preparing some amazing content for you
-        </p>
+       
       </div>
     </div>
   )

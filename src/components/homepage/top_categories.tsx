@@ -1,27 +1,19 @@
 import React from "react";
 import Image from "next/image";
+import { fetchTopProducts } from "@/sanity/lib/quries";
+import { urlFor } from "@/sanity/lib/image";
 
-const TopCategories = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Wing Chair",
-      qunatity: "3,584 Products",
-      image: "/homepage/chair1.png",
-    },
-    {
-      id: 2,
-      name: "Wooden Chair",
-      qunatity: "157 Products",
-      image: "/homepage/chair5.png",
-    },
-    {
-      id: 3,
-      name: "Desk Chair",
-      qunatity: "154 Products",
-      image: "/homepage/chair6.png",
-    },
-  ];
+interface TopProductType {
+  image: string;
+  productname: string;
+  slug: {
+    current: string;
+  };
+  quantityofproduct: number;
+}
+
+const TopCategories = async () => {
+  const topProducts = await fetchTopProducts();
 
   return (
     <div className="pl-10 xl:pl-36 py-20 max-w-[1500px] mx-auto">
@@ -30,20 +22,20 @@ const TopCategories = () => {
       </div>
 
       <div className="h-auto flex-wrap xl:flex-nowrap mt-8 flex xl:justify-between items-center gap-5 justify-center">
-        {products.map((product) => (
-          <div key={product.id}>
+        {topProducts.map((product: TopProductType) => (
+          <div key={product.slug.current}>
             <div className="flex flex-col">
               <div className="hover:scale-105 duration-300 ease-in-out cursor-pointer pr-10 relative flex justify-center items-center w-full h-full object-center rounded-lg bg-second1 group">
                 <Image
-                  src={product.image}
-                  alt={product.name}
+                  src={urlFor(product.image).url()}
+                  alt={product.productname}
                   width="400"
                   height="400"
                 />
 
                 <div className="absolute bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[90%] bg-black bg-opacity-70 text-white py-5 px-4 rounded-b-md">
-                  <h1>{product.name}</h1>
-                  <p>{product.qunatity}</p>
+                  <h1>{product.productname}</h1>
+                  <p>{product.quantityofproduct} Products</p>
                 </div>
               </div>
             </div>

@@ -12,7 +12,7 @@ export default function Home() {
       <CompanyLogos />
       <FeatureProducts />
       <TopCategories />
-      *<ExploreProducts />
+      <ExploreProducts />
       <OurProducts />
     </div>
   );

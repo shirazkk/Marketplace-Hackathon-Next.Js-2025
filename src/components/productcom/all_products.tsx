@@ -3,118 +3,20 @@ import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { fetchProducts } from "@/sanity/lib/quries";
+import { urlFor } from "@/sanity/lib/image";
 
-const AllProducts = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair7.png",
-    },
-    {
-      id: 2,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair8.png",
-    },
-    {
-      id: 3,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair9.png",
-    },
-    {
-      id: 4,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair10.png",
-    },
-    {
-      id: 5,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair5.png",
-    },
-    {
-      id: 6,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair2.png",
-    },
-    {
-      id: 7,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair3.png",
-    },
-    {
-      id: 8,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair7.png",
-    },
-    {
-      id: 9,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair1.png",
-    },
-    {
-      id: 10,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair8.png",
-    },
-    {
-      id: 11,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair9.png",
-    },
-    {
-      id: 12,
-      name: "Library Stool Chair",
-      price: {
-        price1: "$20",
-        price2: "$30",
-      },
-      image: "/homepage/chair6.png",
-    },
-  ];
+interface ProductsType {
+  image: string;
+  name: string;
+  slug: {
+    current: string;
+  };
+  price: string;
+}
+
+const AllProducts = async () => {
+  const allproducts = await fetchProducts();
 
   return (
     <div className=" lg:pl-24 xl:pl-36 md:pl-10 pl-5 py-14 max-w-[1500px] mx-auto px-5">
@@ -124,15 +26,15 @@ const AllProducts = () => {
         </h1>
       </div>
       <div className="w-full justify-center items-center grid md:grid-cols-3 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-7 h-auto  justify-items-center md:justify-items-stretch">
-        {products.map((product) => (
-          <Link key={product.id} href={`/products/${product.id}`}>
-            <div
-              key={product.id}
-              className="flex flex-col  justify-center items-center text-center max-w-[250px]"
-            >
+        {allproducts.map((product: ProductsType, index: number) => (
+          <Link
+            key={product.slug.current}
+            href={`/products/${product.slug.current}`}
+          >
+            <div className="flex flex-col  justify-center items-center text-center max-w-[250px]">
               <div className="hover:scale-105 duration-300 ease-in-out cursor-pointer relative flex justify-center items-center w-64 h-64 object-center rounded-lg">
                 <Image
-                  src={product.image}
+                  src={urlFor(product.image).url()}
                   alt={product.name}
                   width="160"
                   height="160"
@@ -140,26 +42,17 @@ const AllProducts = () => {
                 />
                 <div
                   className={`${
-                    product.id === 1 ||
-                    product.id === 2 ||
-                    product.id === 5 ||
-                    product.id === 6 ||
-                    product.id === 9 ||
-                    product.id === 10
+                    index === 0 || index === 1 || index === 4 || index === 5
                       ? "block"
                       : "hidden"
                   } py-2 px-3 absolute top-2 left-0`}
                 >
                   <p
                     className={`${
-                      product.id === 1 || product.id === 5 || product.id === 9
-                        ? "bg-new"
-                        : "bg-sales"
+                      index === 0 || index === 4 ? "bg-new" : "bg-sales"
                     }  rounded-md px-3 py-1 text-center text-white`}
                   >
-                    {product.id === 1 || product.id === 5 || product.id === 9
-                      ? "New"
-                      : "Sales"}
+                    {index === 0 || index === 4 ? "New" : "Sales"}
                   </p>
                 </div>
               </div>
@@ -170,18 +63,16 @@ const AllProducts = () => {
                   </h2>
                   <div className="flex gap-1 items-center mt-2">
                     <p className="text-lg text-button2 font-medium ">
-                      {product.price.price1}
+                      ${product.price}
                     </p>
                     <p
                       className={`${
-                        product.id === 2 ||
-                        product.id === 6 ||
-                        product.id === 10
+                        index === 1 || index === 5 || index === 9
                           ? "block"
                           : "hidden"
                       }   text-fourth line-through`}
                     >
-                      {product.price.price2}
+                      $30
                     </p>
                   </div>
                 </div>

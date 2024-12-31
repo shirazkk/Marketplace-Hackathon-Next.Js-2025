@@ -1,38 +1,17 @@
+import { urlFor } from "@/sanity/lib/image";
+import { fetchExploreProducts } from "@/sanity/lib/quries";
 import Image from "next/image";
 
-export default function ExploreProducts() {
-  const images = [
-    {
-      id: 1,
-      src: "/homepage/chair9.png",
-      alt: "Placeholder",
-      colSpan: "md:col-span-2 lg:row-span-2 lg:col-span-2",
-    },
-    {
-      id: 2,
-      src: "/homepage/chair10.png",
-      alt: "Placeholder",
-      colSpan: "md:col-span-1",
-    },
-    {
-      id: 3,
-      src: "/homepage/chair7.png",
-      alt: "Placeholder",
-      colSpan: "md:col-span-1",
-    },
-    {
-      id: 4,
-      src: "/homepage/chair2.png",
-      alt: "Placeholder",
-      colSpan: "md:col-span-1",
-    },
-    {
-      id: 5,
-      src: "/homepage/chair7.png",
-      alt: "Placeholder",
-      colSpan: "md:col-span-1",
-    },
-  ];
+interface ExploreProductsType {
+  productimg: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+}
+
+export default async function ExploreProducts() {
+  const exploreNewProducts = await fetchExploreProducts();
 
   return (
     <div className="h-auto max-w-[1500px] mx-auto relative">
@@ -41,17 +20,22 @@ export default function ExploreProducts() {
       </p>
       <div className="mx-auto w-[85%] h-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 h-full">
-          {images.map((image) => (
-            <div key={image.id} className={image.colSpan}>
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={300}
-                height={300}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
+          {exploreNewProducts.map(
+            (product: ExploreProductsType, index: number) => (
+              <div
+                key={product.slug.current}
+                className={`${index === 0 ? "md:col-span-2 lg:row-span-2 lg:col-span-2" : "md:col-span-1"}`}
+              >
+                <Image
+                  src={urlFor(product.productimg).url()}
+                  alt={product.title}
+                  width={300}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>

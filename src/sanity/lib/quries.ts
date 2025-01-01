@@ -60,19 +60,4 @@ export const fetchExploreProducts = async () => {
     return data
 }
 
-export const fetchContactMessage = async () => {
 
-    const query6 = `
-      *[_type == "contactmessage"]{
-        _id,
-        name,
-        email,
-        subject,
-        usermessage,
-        createdAt
-      }
-    `;
-
-    const data = await client.fetch(query6)
-    return data
-}

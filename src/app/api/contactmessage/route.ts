@@ -1,156 +1,130 @@
-// // import client from "@/sanity/lib/client";
-// import { NextResponse } from "next/server";
-
-// let userDetails: { _id: string; name: string; email: string; subject: string; usermessage: string; createdAt: string }[] = [];
-
-
-// // Handle GET requests
-// export async function GET() {
-//     if (userDetails.length === 0) {
-//         return NextResponse.json({ error: 'No users found' }, { status: 404 });
-//     }
-//     return NextResponse.json(userDetails);
-// }
-// export async function POST(req: Request) {
-
-//     try {
-//         const body = await req.json();
-
-//         if (!body.name || !body.email || !body.subject || !body.usermessage) {
-//             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-//         }
-
-//         const newUser = {
-//             _id: crypto.randomUUID(),
-//             name: body.name,
-//             email: body.email,
-//             subject: body.subject,
-//             usermessage: body.usermessage,
-//             createdAt: new Date().toISOString(),
-//         };
-//         const sanitizedEmail = body.email.trim().replace(/[<>]/g, "");
-//         if (!sanitizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
-//             return NextResponse.json(
-//                 { message: "Please enter Valid email" },
-//                 { status: 400 }
-//             )
-//         }
-
-//         userDetails = [newUser, ...userDetails];
-
-//         // const isDuplicate = userDetails.some((record) => record.email === body.email)
-//         // if (isDuplicate) {
-//         //     return NextResponse.json(
-//         //         { message: "This email is already registered." },
-//         //         { status: 400 }
-//         //     )
-//         // }
-
-
-
-
-//         // const newMessage = await client.create({
-//         //     _type: "contactmessage",
-//         //     _id,
-//         //     name,
-//         //     email,
-//         //     subject,
-//         //     usermessage,
-//         //     createdAt: new Date().toISOString(),
-//         // });
-
-
-
-//         return NextResponse.json(
-//             { message: "Data received successfully", userdata: newUser },
-//             { status: 200 }
-//         );
-
-//     }
-//     catch (error) {
-//         console.error("Error handling email subscription:", error);
-//         return NextResponse.json(
-//             { message: "Internal Server Error" },
-//             { status: 500 }
-//         );
-
-//     }
-// }
-
-
-
-
-
-
-
-
 
 import { NextResponse } from "next/server";
-import client from "@/sanity/lib/client"; // Import your Sanity client
 
-let userDetails: { _id: string; name: string; email: string; subject: string; usermessage: string; createdAt: string }[] = [];
+const { SANITY_TOKEN, NEXT_PUBLIC_SANITY_DATASET, NEXT_PUBLIC_SANITY_PROJECT_ID } = process.env;
 
-// Handle GET requests
-export async function GET() {
-    if (userDetails.length === 0) {
-        return NextResponse.json({ error: "No users found" }, { status: 404 });
-    }
-    return NextResponse.json(userDetails);
-}
-
-// Handle POST requests
-export async function POST(req: Request) {
+export async function POST(request: Request) {
     try {
-        const body = await req.json();
+        const contactForm = await request.json();
+        const { name, email, subject, usermessage } = contactForm;
 
-        // Validate the request body
-        if (!body.name || !body.email || !body.subject || !body.usermessage) {
-            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        // Validate required fields
+        if (!name || !email || !usermessage) {
+            return NextResponse.json(
+                { error: "Missing required fields" },
+                { status: 400 }
+            );
         }
 
         // Sanitize email
-        const sanitizedEmail = body.email.trim().replace(/[<>]/g, "");
-        if (!sanitizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
-            return NextResponse.json({ error: "Please enter a valid email" }, { status: 400 });
+        const sanitizedEmail = email.trim().replace(/[<>]/g, "");
+        if (!sanitizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return NextResponse.json(
+                { error: "Invalid email format" },
+                { status: 400 }
+            );
         }
 
-        // Create a new user object
-        const newUser = {
-            _id: crypto.randomUUID(),
-            name: body.name,
-            email: body.email,
-            subject: body.subject,
-            usermessage: body.usermessage,
-            createdAt: new Date().toISOString(),
+        const mutations = {
+            mutations: [
+                {
+                    create: {
+                        _type: "contactmessage",
+                        _id: crypto.randomUUID(),
+                        name,
+                        email,
+                        subject,
+                        usermessage,
+                        createdAt: new Date().toISOString(),
+                    },
+                },
+            ],
         };
 
-        // Save to in-memory array (optional)
-        userDetails = [newUser, ...userDetails];
 
-        // Save to Sanity
-        const savedMessage = await client.create({
-            _type: "contactmessage", // Ensure this matches your Sanity schema's type
-            _id: crypto.randomUUID(),
-            name: body.name,
-            email: body.email,
-            subject: body.subject,
-            usermessage: body.usermessage,
-            createdAt: new Date().toISOString(),
-        });
+        // Send data to Sanity
+        const response = await fetch(
+            `https://${NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/${NEXT_PUBLIC_SANITY_DATASET}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${SANITY_TOKEN}`,
+                },
+                body: JSON.stringify(mutations),
+            }
+        );
 
-        // Return success response
+        const responseData = await response.json();
+        // Handle Sanity API errors
+        if (!response.ok || responseData.error) {
+            console.error("Sanity API error:", responseData);
+            return NextResponse.json(
+                { error: "Failed to save data to Sanity", details: responseData },
+                { status: 500 }
+            );
+        }
+
         return NextResponse.json(
             {
                 message: "Data received successfully and saved to Sanity",
-                userdata: savedMessage,
+                data: responseData,
             },
             { status: 200 }
         );
+
     } catch (error) {
-        console.error("Error handling email subscription:", error);
+        console.error("Error handling POST request:", error);
         return NextResponse.json(
             { error: "Internal Server Error" },
             { status: 500 }
         );
     }
 }
+
+
+
+export async function GET() {
+    try {
+        const query = `*[_type == "contactmessage"]{
+            _id,
+            name,
+            email,
+            subject,
+            usermessage,
+            createdAt
+        }`;
+        const response = await fetch(
+            `https://${NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${NEXT_PUBLIC_SANITY_DATASET}?query=${encodeURIComponent(query)}`,
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${SANITY_TOKEN}`,
+                },
+            }
+        );
+        const responseData = await response.json();
+        if (!response.ok || responseData.error) {
+            console.error("Sanity API error:", responseData);
+            return NextResponse.json(
+                { error: "Failed to fetch data", details: responseData },
+                { status: 500 }
+            );
+        }
+        return NextResponse.json(
+            { message: "Data fetched successfully", data: responseData.result },
+            { status: 200 }
+        );
+    }
+
+    catch (error) {
+        console.error("Error fetching data:", error);
+        return NextResponse.json(
+            { message: "Error fetching data" },
+            { status: 500 }
+        );
+    }
+}
+
+
+

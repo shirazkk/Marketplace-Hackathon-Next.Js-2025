@@ -5,6 +5,7 @@ import TopHeader from "@/components/homepage/top_header";
 import MiddleHeader from "@/components/homepage/middle_header";
 import NavHeader from "@/components/homepage/nav_header";
 import Footer from "@/components/homepage/footer";
+import CartProviderWrapper from "@/components/cartProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,11 +33,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TopHeader />
-        <MiddleHeader />
-        <NavHeader />
-        {children}
-        <Footer />
+        <CartProviderWrapper>
+          <TopHeader />
+          <MiddleHeader />
+          <NavHeader />
+          {children}
+          <Footer />
+        </CartProviderWrapper>
       </body>
     </html>
   );

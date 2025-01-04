@@ -1,9 +1,12 @@
+"use client";
 import { ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useShoppingCart } from "use-shopping-cart";
 
 const MiddleHeader = () => {
+  const { cartCount } = useShoppingCart();
   return (
     <div className="bg-third py-4 px-4 ">
       <div className=" w-full sm:w-[70%] mx-auto flex justify-between items-center max-w-[1500px]">
@@ -31,8 +34,8 @@ const MiddleHeader = () => {
                 color="black"
                 strokeWidth={1.25}
               />
-              <p className="bg-second  w-5 h-5 rounded-full text-center absolute right-2">
-                2
+              <p className="bg-second w-5 h-5 rounded-full text-center absolute right-2 flex items-center justify-center">
+                {cartCount || 0}
               </p>
             </Button>
           </Link>

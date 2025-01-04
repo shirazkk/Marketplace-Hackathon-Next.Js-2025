@@ -1,8 +1,6 @@
 import client from "@/sanity/lib/client";
 import { NextResponse } from "next/server";
 
-
-
 export async function GET(
     request: Request,
     { params }: { params: Promise<{ slug: string }> },
@@ -10,10 +8,12 @@ export async function GET(
     try {
         const singleProduct = `
     *[_type == "product" && slug.current == $slug][0]{
+      _id,
       name,
       price,
      "imageUrl": image.asset->url,
-      description
+      description,
+      price_id
     }
     `;
         const product = await client.fetch(singleProduct, {
@@ -26,7 +26,7 @@ export async function GET(
         return NextResponse.json(product);
     }
     catch (error) {
-        return NextResponse.json({ message: "An error occurred",error }, { status: 500 });
+        return NextResponse.json({ message: "An error occurred", error }, { status: 500 });
     }
 
 }

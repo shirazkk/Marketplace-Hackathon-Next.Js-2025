@@ -1,9 +1,9 @@
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const { SANITY_TOKEN, NEXT_PUBLIC_SANITY_DATASET, NEXT_PUBLIC_SANITY_PROJECT_ID } = process.env;
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const contactForm = await request.json();
         const { name, email, subject, usermessage } = contactForm;
@@ -11,16 +11,21 @@ export async function POST(request: Request) {
         // Validate required fields
         if (!name || !email || !usermessage) {
             return NextResponse.json(
-                { error: "Missing required fields" },
+                { error: "Missing required fields (name, email, message)." },
                 { status: 400 }
             );
         }
 
-        // Sanitize email
+        // Sanitize inputs
+        const sanitizedName = name.trim().replace(/[<>]/g, "");
         const sanitizedEmail = email.trim().replace(/[<>]/g, "");
-        if (!sanitizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        const sanitizedMessage = usermessage.trim().replace(/[<>]/g, "");
+        const sanitizedSubject = subject ? subject.trim().replace(/[<>]/g, "") : "";
+
+        // Validate sanitized email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sanitizedEmail)) {
             return NextResponse.json(
-                { error: "Invalid email format" },
+                { error: "Invalid email format." },
                 { status: 400 }
             );
         }
@@ -31,16 +36,23 @@ export async function POST(request: Request) {
                     create: {
                         _type: "contactmessage",
                         _id: crypto.randomUUID(),
-                        name,
-                        email,
-                        subject,
-                        usermessage,
+                        name: sanitizedName,
+                        email: sanitizedEmail,
+                        subject: sanitizedSubject,
+                        usermessage: sanitizedMessage,
                         createdAt: new Date().toISOString(),
                     },
                 },
             ],
         };
 
+        // Check environment variables
+        if (!SANITY_TOKEN || !NEXT_PUBLIC_SANITY_PROJECT_ID || !NEXT_PUBLIC_SANITY_DATASET) {
+            return NextResponse.json(
+                { error: "Missing required environment variables." },
+                { status: 500 }
+            );
+        }
 
         // Send data to Sanity
         const response = await fetch(
@@ -56,7 +68,6 @@ export async function POST(request: Request) {
         );
 
         const responseData = await response.json();
-        // Handle Sanity API errors
         if (!response.ok || responseData.error) {
             console.error("Sanity API error:", responseData);
             return NextResponse.json(
@@ -66,13 +77,9 @@ export async function POST(request: Request) {
         }
 
         return NextResponse.json(
-            {
-                message: "Data received successfully and saved to Sanity",
-                data: responseData,
-            },
+            { message: "Data received successfully and saved to Sanity", data: responseData },
             { status: 200 }
         );
-
     } catch (error) {
         console.error("Error handling POST request:", error);
         return NextResponse.json(

@@ -1,39 +1,34 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
 import ProductNotFound from "@/components/productnotfound";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import client from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
+import AddToCart from "@/components/addtocart";
 
 const featureproducts = [
   {
-   
     name: "Library Stool Chair",
     price: "$20",
     image: "/homepage/chair7.png",
   },
   {
-  
     name: "Library Stool Chair",
     price: "$20",
     image: "/homepage/chair8.png",
   },
   {
-   
     name: "Library Stool Chair",
     price: "$20",
     image: "/homepage/chair9.png",
   },
   {
-   
     name: "Library Stool Chair",
     price: "$20",
     image: "/homepage/chair10.png",
   },
   {
-
     name: "Library Stool Chair",
     price: "$20",
     image: "/homepage/chair6.png",
@@ -47,14 +42,16 @@ export default async function ProductPage({
 }) {
   const singlePageQuery = `
   *[_type == "product" && slug.current == $slug][0]{
+    _id,
     name,
     price,
     image,
-    description
+    description,
+   price_id
   }
   `;
   const product = await client.fetch(singlePageQuery, {
-    slug: (await params).slug
+    slug: (await params).slug,
   });
 
   if (!product) {
@@ -65,9 +62,7 @@ export default async function ProductPage({
     <div className="w-screen ">
       <div className="w-screen overflow-hidden mx-auto max-w-[1500px]">
         <div className="px-5  py-10">
-          <div
-            className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-5 xl:gap-0 "
-          >
+          <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-5 xl:gap-0 ">
             {/* Product Image */}
             {product.image && (
               <div className="relative h-[300px] md:h-[500px] w-full">
@@ -92,12 +87,17 @@ export default async function ProductPage({
               </div>
               <div>
                 <p className="text-gray-600 border-t-[1px] py-4 md:py-8 text-center md:text-left break-words">
-                 {product.description}
+                  {product.description}
                 </p>
-                <Button className="bg-second py-4 mx-auto  md:mx-0 md:py-6 px-4 md:px-6 hover:bg-hover text-white flex items-center w-fit">
-                  <ShoppingCart className="mr-1" />
-                  Add to Cart
-                </Button>
+                <AddToCart
+                  key={product._id}
+                  price_id={product.price_id}
+                  name={product.name}
+                  description={product.description}
+                  price={product.price}
+                  currency="USD"
+                  image={product.image}
+                />
               </div>
             </div>
           </div>

@@ -39,6 +39,12 @@ export const Products = {
                     .error("Price is required and must be a positive number."),
         },
         {
+            name: "price_id",
+            title: "Price ID",
+            type: "string",
+            validation: (Rule: Rule) => Rule.required().error("Price ID is required."),
+        },
+        {
             name: "description",
             title: "Description",
             type: "string",

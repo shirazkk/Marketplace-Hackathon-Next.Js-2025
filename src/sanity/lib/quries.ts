@@ -25,10 +25,12 @@ export const fetchCompanyLogos = async () => {
 export const fetchProducts = async () => {
     const query3 = `
 *[_type == "product"] | order(order asc){
+  _id,
   image,
   name,
   slug,
-  price
+  price,
+  price_id
 }
     `
     const data = await client.fetch(query3)

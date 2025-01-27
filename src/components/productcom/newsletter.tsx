@@ -1,17 +1,28 @@
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import client from "@/sanity/lib/client";
+import { ProductsType } from "../../../types";
 
-export default function NewsletterAndInstagram() {
-  const instagramImages = [
-    { id: 1, src: "/homepage/chair5.png", alt: "Chair 1" },
-    { id: 2, src: "/homepage/chair1.png", alt: "Chair 2" },
-    { id: 3, src: "/homepage/chair8.png", alt: "Chair 3" },
-    { id: 4, src: "/homepage/chair7.png", alt: "Chair 4" },
-    { id: 5, src: "/homepage/chair9.png", alt: "Chair 5" },
-    { id: 5, src: "/homepage/chair6.png", alt: "Chair 5" },
-  ];
-
+export default async function NewsletterAndInstagram() {
+  const query = `*[_type == "products" && "instagram" in tags] {
+    _id,
+    title,
+    slug,
+    price,
+    priceWithoutDiscount,
+    badge,
+    "imageUrl": image.asset->url,
+    category->{
+      _id,
+      title
+    },
+    description,
+    inventory,
+    tags 
+}
+`;
+  const fetchInstagramProducts = await client.fetch(query);
   return (
     <div className="bg-third py-20 mt-20">
       <div className="max-w-[1500px] mx-auto px-4">
@@ -39,17 +50,18 @@ export default function NewsletterAndInstagram() {
             Follow Products And Discounts On Instagram
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
-            {instagramImages.map((image) => (
+            {fetchInstagramProducts.map((index: ProductsType) => (
               <div
-                key={image.id}
+                key={index.slug.current}
                 className="overflow-hidden hover:scale-105 duration-300 ease-in-out cursor-pointer"
               >
                 <Image
-                  src={image.src}
-                  alt={image.alt}
+                  src={index.imageUrl}
+                  alt={index.title}
                   width={300}
                   height={300}
                   objectFit="cover"
+                  quality={100}
                   className="w-full h-full"
                 />
               </div>

@@ -7,15 +7,27 @@ import { useShoppingCart } from "use-shopping-cart";
 import { useEffect, useState } from "react";
 
 const CartProducts = () => {
-  const { cartCount, cartDetails, removeItem, totalPrice, redirectToCheckout } =
-    useShoppingCart();
+  const {
+    cartCount,
+    cartDetails,
+    removeItem,
+    redirectToCheckout,
+  } = useShoppingCart();
   const [isLoading, setIsLoading] = useState(true);
+  const [notification, setNotification] = useState(false);
 
   useEffect(() => {
     if (cartCount !== undefined) {
       setIsLoading(false);
     }
   }, [cartCount]);
+
+  // Calculate total price dynamically
+  const calculatedTotalPrice = Object.values(cartDetails ?? {}).reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
   const handleCheckout = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     try {
@@ -28,11 +40,17 @@ const CartProducts = () => {
     }
   };
 
+  const handleRemoveItem = (itemId: string) => {
+    setNotification(true);
+    removeItem(itemId);
+    setTimeout(() => setNotification(false), 2000);
+  };
+
   return (
     <div className="mx-auto w-[90%] py-8 max-w-[1500px]">
       <div className="flex flex-col lg:flex-row lg:gap-10 gap-4">
         <div className="w-full lg:w-[70%] h-auto px-4 p-4 lg:p-15 xl:p-20">
-          <h1 className="font-semibold text-2xl mb-4">Bag</h1>
+          <h1 className="font-semibold text-2xl mb-4">Your Cart</h1>
           <div className="flex flex-col gap-4">
             {isLoading ? (
               <div className="flex items-center justify-center h-96">
@@ -47,6 +65,7 @@ const CartProducts = () => {
                   alt="Empty Cart"
                   width={150}
                   height={150}
+                  quality={100}
                   className="mb-6"
                 />
                 <h1 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -58,7 +77,7 @@ const CartProducts = () => {
                 <Button
                   className="bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800"
                   onClick={() => {
-                    window.location.href = "/products"; // Redirect to products page
+                    window.location.href = "/"; // Redirect to Home page
                   }}
                 >
                   Start Shopping
@@ -86,20 +105,23 @@ const CartProducts = () => {
                         <p>{entry.name}</p>
                         <p>MRP: ${entry.price}</p>
                       </div>
-                      <p className="text-fourth mt-4">
-                        Ashen Slate/Cobalt Bliss
-                      </p>
+                      <p className="text-fourth mt-4">{entry.currency}</p>
                       <div className="space-x-16 text-fourth mt-1">
                         <span>Size L</span>
-                        <span>Quantity 2</span>
+                        <span>
+                          Quantity{" "}
+                          <p className="inline px-3 rounded-full py-1 bg-slate-300 text-black">
+                            {entry.quantity}
+                          </p>
+                        </span>
                       </div>
-                      <div className="flex gap-3  entrys-center mt-8">
+                      <div className="flex gap-3 entrys-center mt-8">
                         <div>
                           <Heart className="hover:scale-105 duration-300 ease-in-out cursor-pointer" />
                         </div>
                         <div
                           className="hover:scale-105 duration-300 ease-in-out cursor-pointer"
-                          onClick={() => removeItem(entry.id)}
+                          onClick={() => handleRemoveItem(entry.id)}
                         >
                           <MdOutlineDelete size={25} />
                         </div>
@@ -116,7 +138,7 @@ const CartProducts = () => {
             <h1 className="font-semibold text-2xl mb-3">Summary</h1>
             <div className="flex justify-between w-full mb-2">
               <p>Subtotal</p>
-              <p>${totalPrice?.toFixed(2) || "0.00"}</p>
+              <p>${calculatedTotalPrice.toFixed(2) || "0.00"}</p>
             </div>
             <div className="flex justify-between w-full border-b-[1px] pb-2 mb-2">
               <p>Estimated Delivery & Handling</p>
@@ -124,19 +146,29 @@ const CartProducts = () => {
             </div>
             <div className="flex justify-between w-full border-b-[1px] pb-4 mb-2">
               <p>Total</p>
-              <p>${totalPrice}</p>
+              <p>${calculatedTotalPrice.toFixed(2)}</p>
             </div>
-            <div className="w-full mt-2   hover:scale-105 duration-300 ease-in-out cursor-pointer">
+            <div className="w-full mt-2 hover:scale-105 duration-300 ease-in-out cursor-pointer">
               <Button
                 onClick={handleCheckout}
                 className="w-full py-7 rounded-3xl cursor-pointer text-white bg-second hover:bg-hover"
               >
-                Member Checkout
+                Checkout
               </Button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Notification Popup */}
+      {notification && (
+        <div
+          role="alert"
+          className="py-4 px-8 fixed top-5 left-1/2 transform -translate-x-1/2 bg-red-100 dark:bg-red-700 border-l-4 border-red-500 dark:border-red-700 text-green-900 dark:text-red-100 p-2 rounded-lg flex items-center transition-all duration-500 ease-in-out"
+        >
+          <p className="text-xs font-semibold">Item removed from cart</p>
+        </div>
+      )}
     </div>
   );
 };

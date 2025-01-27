@@ -1,14 +1,8 @@
 import { urlFor } from "@/sanity/lib/image";
 import { fetchCompanyLogos } from "@/sanity/lib/quries";
 import Image from "next/image";
+import { LogoType } from "../../../types";
 
-interface LogoType {
-  title: string;
-  logos: string;
-  slug: {
-    current: string;
-  };
-}
 
 const CompanyLogos = async () => {
   const fectchData = await fetchCompanyLogos();
@@ -22,6 +16,7 @@ const CompanyLogos = async () => {
             alt={image.title}
             width={80}
             height={80}
+            quality={100}
             className="object-contain hover:scale-110 duration-300 ease-in-out cursor-pointer"
           />
         ))}

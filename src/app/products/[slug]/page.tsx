@@ -4,10 +4,17 @@ import ProductNotFound from "@/components/productnotfound";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import client from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
-import AddToCart from "@/components/addtocart";
+import AddToCart from "@/components/cartcomponents/addtocart";
+import AddToWishlist from "@/components/wishlistcomponent/wishlistbutton";
+// import { ProductsType } from "../../../../types";
 
-const featureproducts = [
+interface FeatureProductType {
+  name: string;
+  price: string;
+  image: string;
+}
+
+const featureproducts: FeatureProductType[] = [
   {
     name: "Library Stool Chair",
     price: "$20",
@@ -41,15 +48,24 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const singlePageQuery = `
-  *[_type == "product" && slug.current == $slug][0]{
-    _id,
-    name,
-    price,
-    image,
-    description,
-   price_id
-  }
+    *[_type == "products" && slug.current == $slug][0]{
+      _id,
+      title,
+      price,
+      price_id,
+      priceWithoutDiscount,
+      badge,
+      "imageUrl": image.asset->url,
+      category->{
+        _id,
+        title
+      },
+      description,
+      inventory,
+      tags
+    }
   `;
+
   const product = await client.fetch(singlePageQuery, {
     slug: (await params).slug,
   });
@@ -59,68 +75,87 @@ export default async function ProductPage({
   }
 
   return (
-    <div className="w-screen ">
-      <div className="w-screen overflow-hidden mx-auto max-w-[1500px]">
-        <div className="px-5  py-10">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-5 xl:gap-0 ">
-            {/* Product Image */}
-            {product.image && (
-              <div className="relative h-[300px] md:h-[500px] w-full">
-                <Image
-                  src={urlFor(product.image).url()}
-                  alt={product.name}
-                  fill
-                  quality={100}
-                  className="object-contain rounded-md"
-                />
-              </div>
-            )}
-            {/* Product Details */}
-            <div className="flex flex-col gap-6 md:gap-8 w-full md:justify-start  md:items-start justify-center items-center md:w-[90%] lg:w-[70%] overflow-hidden">
-              <h1 className="text-center md:text-left text-5xl sm:text-6xl font-semibold break-words">
-                {product.name}
-              </h1>
-              <div>
-                <Badge className="bg-second hover:bg-hover px-4 md:px-6 py-2 md:py-3 rounded-2xl text-white">
-                  ${product.price} USD
+    <div className="w-screen bg-background py-10">
+      <div className="max-w-[1500px] mx-auto px-4">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Product Image */}
+          {product.imageUrl ? (
+            <div className="flex justify-center items-center relative w-full">
+              <Image
+                src={product.imageUrl}
+                alt={product.title}
+                layout="intrinsic"
+                width={500}
+                height={500}
+                quality={100}
+                className="object-contain rounded-md"
+              />
+            </div>
+          ) : (
+            <p className="text-gray-500">Image not available</p>
+          )}
+
+          {/* Product Details */}
+          <div className="flex flex-col gap-6 md:gap-8 w-full  lg:w-[90%] justify-center items-center md:items-start">
+            <h1 className="text-center md:text-left text-5xl  md:text-6xl font-semibold">
+              {product.title}
+            </h1>
+
+            <div className="flex flex-row gap-4 md:gap-8 items-center md:items-start justify-center md:justify-start">
+              <Badge className="bg-second hover:bg-hover px-4 py-2 rounded-2xl text-white">
+                ${product.price} USD
+              </Badge>
+              {product.inventory === 0 ? (
+                <Badge className="bg-red-500 px-4 py-2 rounded-2xl text-white">
+                  Out of Stock
                 </Badge>
-              </div>
-              <div>
-                <p className="text-gray-600 border-t-[1px] py-4 md:py-8 text-center md:text-left break-words">
-                  {product.description}
-                </p>
-                <AddToCart
-                  key={product._id}
-                  price_id={product.price_id}
-                  name={product.name}
-                  description={product.description}
-                  price={product.price}
-                  currency="USD"
-                  image={product.image}
-                />
-              </div>
+              ) : (
+                <Badge className="bg-green-500 px-4 py-2 rounded-2xl text-white">
+                  {product.inventory === 1 ? "Only 1 left!" : "In Stock"}
+                </Badge>
+              )}
+            </div>
+
+            <p className="text-gray-600 mt-4 md:text-left text-center">
+              {product.description}
+            </p>
+
+            <div className="flex gap-5 flex-col md:flex-row items-center justify-center">
+              <AddToWishlist
+                productId={product._id}
+                productName={product.title}
+                productImage={product.imageUrl || ""}
+                productPrice={product.price}
+              />
+              <AddToCart
+                key={product._id}
+                price_id={product.price_id || ""}
+                name={product.title}
+                description={product.description || ""}
+                price={product.price}
+                currency="USD"
+                image={product.imageUrl || ""}
+              />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Feature-Products */}
+      {/* Featured Products */}
       <div className="px-4 py-14 max-w-[1500px] mx-auto">
-        <div className="w-[85%] relative flex justify-between items-end gap-6 mx-auto">
-          <h1 className="text-3xl  tracking-widest font-bold">
-            Featured Products
-          </h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Featured Products</h1>
           <Link href="/products">
             <Button
               variant="link"
-              className=" hover:text-hover font-bold underline underline-offset-8 text-black"
+              className="text-black hover:text-hover font-bold underline"
             >
               View all
             </Button>
           </Link>
         </div>
 
-        <div className="w-[85%] mx-auto  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  xl:grid-cols-5 gap-6 mt-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {featureproducts.map((product) => (
             <div key={product.name} className="flex flex-col">
               <div className="relative flex justify-center items-center w-full h-64 object-center rounded-lg">

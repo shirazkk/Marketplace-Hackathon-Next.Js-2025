@@ -1,67 +1,80 @@
-import { Rule } from "sanity";
+import { defineType } from "sanity";
 
-export const Products = {
-    name: "product",
-    title: "Product",
+export const productSchema = defineType({
+    name: "products",
+    title: "Products",
     type: "document",
     fields: [
         {
-            name: 'order',
-            title: 'Order',
-            type: 'number',
-            description: 'Set the order of this product. Lower numbers will appear first.',
-            validation: (Rule: Rule) => Rule.required().min(1),
-        },
-        {
-            name: "name",
-            title: "Name",
+            name: "title",
+            title: "Product Title",
             type: "string",
-            validation: (Rule: Rule) => Rule.required().min(3).error("Name is required and should have at least 3 characters."),
         },
         {
             name: "slug",
             title: "Slug",
             type: "slug",
             options: {
-                source: "name",
-                maxLength: 96,
+                source: "title",
+                maxLength: 200,
             },
-            validation: (Rule: Rule) => Rule.required().error("Slug is required."),
         },
         {
             name: "price",
             title: "Price",
             type: "number",
-            validation: (Rule: Rule) =>
-                Rule.required()
-                    .positive()
-                    .precision(2)
-                    .error("Price is required and must be a positive number."),
         },
         {
             name: "price_id",
-            title: "Price ID",
+            title: "Stripe Price ID",
             type: "string",
-            validation: (Rule: Rule) => Rule.required().error("Price ID is required."),
         },
         {
-            name: "description",
-            title: "Description",
+            title: "Price without Discount",
+            name: "priceWithoutDiscount",
+            type: "number",
+        },
+        {
+            name: "badge",
+            title: "Badge",
             type: "string",
-            validation: (Rule: Rule) =>
-                Rule.required()
-                    .min(10)
-                    .max(500)
-                    .error("Description is required and must be between 10 and 500 characters."),
         },
         {
             name: "image",
-            title: "Image",
+            title: "Product Image",
             type: "image",
+        },
+        {
+            name: "category",
+            title: "Category",
+            type: "reference",
+            to: [{ type: "categories" }],
+        },
+        {
+            name: "description",
+            title: "Product Description",
+            type: "text",
+        },
+        {
+            name: "inventory",
+            title: "Inventory Management",
+            type: "number",
+        },
+        {
+            name: "tags",
+            title: "Tags",
+            type: "array",
+            of: [{ type: "string" }],
             options: {
-                hotspot: true,
+                list: [
+                    { title: "Featured", value: "featured" },
+                    {
+                        title: "Follow products and discounts on Instagram",
+                        value: "instagram",
+                    },
+                    { title: "Gallery", value: "gallery" },
+                ],
             },
-            validation: (Rule: Rule) => Rule.required().error("Image is required."),
         },
     ],
-};
+});

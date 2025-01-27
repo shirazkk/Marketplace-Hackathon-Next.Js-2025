@@ -9,7 +9,7 @@ const CartProviderWrapper = ({ children }: { children: ReactNode }) => {
       cartMode="client-only"
       successUrl="https://comfortyecommerce.vercel.app/stripe/success"
       cancelUrl="https://comfortyecommerce.vercel.app/stripe/failure"
-      stripe={process.env.NEXT_PUBLIC_STRIPE_API_KEY as string}
+      stripe={process.env.NEXT_PUBLIC_STRIPE_API_KEY || ""}
       currency="USD"
       billingAddressCollection={true}
       shouldPersist={true}

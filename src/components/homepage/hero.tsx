@@ -4,12 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { fetchHeroData } from "@/sanity/lib/quries";
 import { urlFor } from "@/sanity/lib/image";
-
-interface HeroData {
-  Smallheading: string;
-  title: string;
-  image: string;
-}
+import { HeroData } from "../../../types";
 
 const Hero = async () => {
   const fetchdata: HeroData = await fetchHeroData();
@@ -41,6 +36,7 @@ const Hero = async () => {
             alt={fetchdata.title}
             width={400}
             height={400}
+            quality={100}
             className="w-[80%] md:w-full h-auto object-contain"
             priority
           />

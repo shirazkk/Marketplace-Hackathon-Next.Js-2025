@@ -1,11 +1,11 @@
-import AllProducts from "@/components/productcom/all_products";
 import NewsletterAndInstagram from "@/components/productcom/newsletter";
 import React from "react";
+import OurProducts from "@/components/productcom/ourproducts";
 
 const Products = () => {
   return (
     <div>
-      <AllProducts />
+      <OurProducts />
       <NewsletterAndInstagram />
     </div>
   );

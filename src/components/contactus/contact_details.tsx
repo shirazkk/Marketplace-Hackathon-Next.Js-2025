@@ -89,6 +89,9 @@ const ContactUs = () => {
         success: false,
         message: "An error occurred. Please try again.",
       });
+      setTimeout(() => {
+        setStatus(null);
+      }, 2000);
     }
   };
 

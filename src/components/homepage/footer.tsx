@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { FaFacebook, FaPinterest, FaTwitter, FaYoutube } from "react-icons/fa";
 import { RxInstagramLogo } from "react-icons/rx";
@@ -22,6 +21,7 @@ const Footer = () => {
                   alt="sofa-logo"
                   width={45}
                   height={45}
+                  quality={100}
                 />
                 <h1 className="text-2xl font-semibold">Comforty</h1>
               </Link>
@@ -115,7 +115,7 @@ const Footer = () => {
           <div className="w-[90%] md:w-[80%] lg:w-[70%] mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 md:gap-0">
             <p className="text-fourth text-sm text-center md:text-left">
               @ 2021 - Blogy - Designed & Developed by{" "}
-              <span className="text-black font-semibold">Zakirsoft</span>
+              <span className="text-black font-semibold">Shiraz</span>
             </p>
             <Image
               src="/homepage/payment_methods.png"

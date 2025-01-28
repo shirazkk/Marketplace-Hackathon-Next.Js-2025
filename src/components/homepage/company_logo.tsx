@@ -14,6 +14,7 @@ const CompanyLogos = async () => {
             key={image.slug.current}
             src={urlFor(image.logos).url()}
             alt={image.title}
+            loading="lazy"
             width={80}
             height={80}
             quality={100}

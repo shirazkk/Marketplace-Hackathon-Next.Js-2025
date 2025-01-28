@@ -121,7 +121,9 @@ const Footer = () => {
               src="/homepage/payment_methods.png"
               alt="payment-methods"
               width={200}
+              loading="lazy"
               height={50}
+              quality={100}
             />
           </div>
         </div>

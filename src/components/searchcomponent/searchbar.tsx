@@ -72,6 +72,7 @@ const ProductSearch = () => {
                       width="160"
                       height="160"
                       quality={100}
+                      loading="lazy"
                       className="w-full h-full"
                     />
                     {product.badge && (

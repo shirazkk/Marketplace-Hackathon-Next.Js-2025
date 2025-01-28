@@ -61,6 +61,7 @@ export default async function NewsletterAndInstagram() {
                   width={300}
                   height={300}
                   objectFit="cover"
+                  loading="lazy"
                   quality={100}
                   className="w-full h-full"
                 />

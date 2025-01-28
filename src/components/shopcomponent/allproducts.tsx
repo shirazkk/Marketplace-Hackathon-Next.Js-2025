@@ -5,15 +5,17 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import client from "@/sanity/lib/client";
-import { ProductsType } from "../../../types"; 
+import { ProductsType } from "../../../types";
+import Skeleton from "../skeltonloader";
 
 const AllProducts = () => {
-  const [fetchAllProducts, setFetchAllProducts] = useState<ProductsType[]>([]); 
-  const [filteredProducts, setFilteredProducts] = useState<ProductsType[]>([]); 
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]); 
+  const [fetchAllProducts, setFetchAllProducts] = useState<ProductsType[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<ProductsType[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [priceSort, setPriceSort] = useState<string>("");
-  const [categories, setCategories] = useState<string[]>([]); 
+  const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null); // Error state
 
   // Pagination State
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -23,6 +25,8 @@ const AllProducts = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true); // Set loading to true when fetching data
+      setError(null); // Reset error message
+
       const query = `*[_type == "products"] {
         _id,
         title,
@@ -40,20 +44,30 @@ const AllProducts = () => {
         tags
       }`;
 
-      const products: ProductsType[] = await client.fetch(query); // Explicitly type the fetched products
-      setFetchAllProducts(products);
-      setFilteredProducts(products);
+      try {
+        const products: ProductsType[] = await client.fetch(query); // Explicitly type the fetched products
+        if (!products.length) {
+          setError("No products available at the moment."); // Set error if no products are found
+        } else {
+          setFetchAllProducts(products);
+          setFilteredProducts(products);
 
-      // Get unique categories from fetched products
-      const fetchedCategories = [
-        ...new Set(
-          products
-            .map((product: ProductsType) => product.category?.title)
-            .filter(Boolean)
-        ),
-      ];
-      setCategories(fetchedCategories);
-      setLoading(false); // Set loading to false when data is loaded
+          // Get unique categories from fetched products
+          const fetchedCategories = [
+            ...new Set(
+              products
+                .map((product: ProductsType) => product.category?.title)
+                .filter(Boolean)
+            ),
+          ];
+          setCategories(fetchedCategories);
+        }
+      } catch (err) {
+        setError("Failed to load products. Please try again later.");
+        console.error(err);
+      } finally {
+        setLoading(false); // Set loading to false when data is loaded
+      }
     };
 
     fetchData();
@@ -111,7 +125,12 @@ const AllProducts = () => {
           All Products
         </h1>
       </div>
-
+      {/* Error Handling UI */}
+      {error && (
+        <div className="text-center text-red-600 mb-4">
+          <p>{error}</p>
+        </div>
+      )}
       {/* Filter Section */}
       <div className="flex flex-col sm:flex-row w-full gap-6 mt-5">
         {/* Category Filter Section */}
@@ -169,13 +188,11 @@ const AllProducts = () => {
 
       {/* Loading State */}
       {loading ? (
-        <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-second"></div>
-        </div>
+        <Skeleton />
       ) : (
         /* Product List */
         <div className="w-full justify-center items-center grid md:grid-cols-3 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-7 h-auto justify-items-center md:justify-items-stretch">
-          {currentProducts.length === 0 ? (
+          {currentProducts.length === 0 && selectedCategories.length > 0 ? (
             <p>No products found matching your filters.</p>
           ) : (
             currentProducts.map((product: ProductsType) => (
@@ -191,6 +208,7 @@ const AllProducts = () => {
                       width="160"
                       height="160"
                       quality={100}
+                      loading="lazy"
                       className="w-full h-full"
                     />
                     {product.badge && (
@@ -244,18 +262,21 @@ const AllProducts = () => {
       )}
 
       {/* Pagination */}
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center items-center mt-8 gap-4">
         <Button
           disabled={currentPage === 1}
           onClick={() => paginate(currentPage - 1)}
-          className="bg-gray-800 text-white px-4 py-2 rounded-lg mr-2"
+          className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-300"
         >
           Previous
         </Button>
+        <p className="text-gray-800 text-lg font-semibold mx-4">
+          Page {currentPage}
+        </p>
         <Button
           disabled={currentPage * productsPerPage >= filteredProducts.length}
           onClick={() => paginate(currentPage + 1)}
-          className="bg-gray-800 text-white px-4 py-2 rounded-lg"
+          className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-300"
         >
           Next
         </Button>

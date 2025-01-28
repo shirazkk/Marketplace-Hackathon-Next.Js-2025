@@ -77,6 +77,7 @@ const AllBlogs = () => {
               <Image
                 src={blog.imageUrl || "/placeholder.jpg"}
                 alt={blog.tittle}
+                loading="lazy"
                 width={1920}
                 height={1080}
                 quality={100}

@@ -1,5 +1,4 @@
 "use client";
-
 import { FaTrash, FaHeart } from "react-icons/fa"; // Icons for removing items and empty state
 import { useWishlist } from "./wishlistcontext";
 import Image from "next/image";
@@ -24,6 +23,7 @@ const Wishlist = () => {
               width={150}
               height={150}
               quality={100}
+              loading="lazy"
               className="mb-6"
             />
             <h1 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -53,6 +53,8 @@ const Wishlist = () => {
                   <Image
                     src={item.image}
                     alt={item.name}
+                    width={80}  
+                    height={80}
                     quality={100}
                     className="h-20 w-20 object-cover rounded-lg"
                   />
@@ -64,6 +66,7 @@ const Wishlist = () => {
 
                 {/* Right side: Remove button */}
                 <Button
+                  variant="ghost"
                   onClick={() => removeFromWishlist(item.id)}
                   className="text-red-600 hover:text-red-800"
                 >

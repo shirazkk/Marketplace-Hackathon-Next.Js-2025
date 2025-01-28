@@ -41,6 +41,7 @@ export default async function GalleryProducts() {
                 width={300}
                 height={300}
                 quality={100}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
             </div>

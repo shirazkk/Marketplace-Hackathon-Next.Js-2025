@@ -45,6 +45,7 @@ const FeatureProducts = async () => {
                 src={product.imageUrl}
                 alt={product.title}
                 width={160}
+                loading="lazy"
                 height={160}
                 quality={100}
                 className="w-full h-full"

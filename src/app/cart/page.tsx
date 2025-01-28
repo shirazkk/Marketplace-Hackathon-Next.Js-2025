@@ -7,12 +7,8 @@ import { useShoppingCart } from "use-shopping-cart";
 import { useEffect, useState } from "react";
 
 const CartProducts = () => {
-  const {
-    cartCount,
-    cartDetails,
-    removeItem,
-    redirectToCheckout,
-  } = useShoppingCart();
+  const { cartCount, cartDetails, removeItem, redirectToCheckout } =
+    useShoppingCart();
   const [isLoading, setIsLoading] = useState(true);
   const [notification, setNotification] = useState(false);
 
@@ -44,6 +40,12 @@ const CartProducts = () => {
     setNotification(true);
     removeItem(itemId);
     setTimeout(() => setNotification(false), 2000);
+  };
+
+  const handleSizeChange = (itemId: string, size: string) => {
+    // Update the selected size of the item in the cart (assuming you can update it via your cart management system)
+    console.log(`Item ${itemId} size changed to: ${size}`);
+    // Example: updateCartSize(itemId, size); // You would update this with the actual cart update logic.
   };
 
   return (
@@ -105,15 +107,39 @@ const CartProducts = () => {
                         <p>{entry.name}</p>
                         <p>MRP: ${entry.price}</p>
                       </div>
-                      <p className="text-fourth mt-4">{entry.currency}</p>
-                      <div className="space-x-16 text-fourth mt-1">
-                        <span>Size L</span>
-                        <span>
-                          Quantity{" "}
-                          <p className="inline px-3 rounded-full py-1 bg-slate-300 text-black">
-                            {entry.quantity}
-                          </p>
-                        </span>
+                      <p className="text-fourth mt-4">{entry.description}</p>
+
+                      {/* Size Selector */}
+                      <div className="flex gap-4">
+                        <div className="mt-4 space-x-2">
+                          <label
+                            htmlFor="size"
+                            className="font-semibold text-sm"
+                          >
+                            Size:
+                          </label>
+                          <select
+                            id="size"
+                            onChange={(e) =>
+                              handleSizeChange(entry.id, e.target.value)
+                            }
+                            defaultValue="medium"
+                            className="mt-2 px-4 py-2 border-2 border-gray-300 rounded-md"
+                          >
+                            <option value="small">Small</option>
+                            <option value="medium">Medium</option>
+                            <option value="large">Large</option>
+                          </select>
+                        </div>
+
+                        <div className="space-x-16 text-fourth mt-8">
+                          <span>
+                            Quantity{" "}
+                            <p className="inline px-3 rounded-full py-1 bg-slate-300 text-black">
+                              {entry.quantity}
+                            </p>
+                          </span>
+                        </div>
                       </div>
                       <div className="flex gap-3 entrys-center mt-8">
                         <div>
@@ -133,6 +159,8 @@ const CartProducts = () => {
             )}
           </div>
         </div>
+
+        {/* Checkout and Summary Section */}
         <div className="w-full lg:w-[50%]  p-4 lg:p-15 xl:p-20 ">
           <div className="flex justify-center flex-col gap-4">
             <h1 className="font-semibold text-2xl mb-3">Summary</h1>

@@ -27,7 +27,7 @@ const TopHeader = () => {
           </div>
           <div className="flex items-center space-x-1 cursor-pointer">
             <CiCircleAlert />
-            <p>Need Help</p>
+            <Link href="/needhelp">Need Help</Link>
           </div>
         </div>
       </div>

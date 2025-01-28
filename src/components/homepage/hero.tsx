@@ -19,10 +19,7 @@ const Hero = async () => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
             {fetchdata.title}
           </h1>
-          <Link
-            href="/products"
-            className="flex justify-center md:justify-start"
-          >
+          <Link href="/shop" className="flex justify-center md:justify-start">
             <Button className="bg-second hover:scale-105 duration-300 ease-in-out cursor-pointer py-6 px-7 hover:bg-hover text-white flex items-center">
               Shop Now
               <ArrowRight className="ml-2" color="white" strokeWidth={1.25} />

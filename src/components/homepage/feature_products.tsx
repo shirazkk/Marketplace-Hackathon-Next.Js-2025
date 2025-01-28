@@ -33,14 +33,14 @@ const FeatureProducts = async () => {
       </div>
 
       {/* Products Grid */}
-      <div className="w-[85%] mx-auto  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-7">
+      <div className="w-[85%] mx-auto  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 mt-7">
         {fetchFeatureProducts.map((product: ProductsType) => (
           <Link
             href={`/products/${product.slug.current}`}
             key={product.slug.current}
             className="flex flex-col"
           >
-            <div className="hover:scale-105 duration-300 ease-in-out cursor-pointer relative flex justify-center items-center w-full h-64 object-center rounded-lg">
+            <div className="hover:scale-105 duration-300 ease-in-out cursor-pointer relative flex justify-center items-center w-auto h-auto rounded-lg">
               <Image
                 src={product.imageUrl}
                 alt={product.title}
@@ -48,7 +48,7 @@ const FeatureProducts = async () => {
                 loading="lazy"
                 height={160}
                 quality={100}
-                className="w-full h-full"
+                className="w-full h-full object-center rounded-lg"
               />
               {product.badge && (
                 <div className="py-2 px-3 absolute top-2 left-0">

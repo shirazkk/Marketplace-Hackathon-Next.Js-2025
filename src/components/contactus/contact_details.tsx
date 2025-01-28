@@ -142,7 +142,7 @@ const ContactUs = () => {
       )}
 
       <div className="md:w-[90%] lg:w-[80%] xl:w-[70%] mx-auto py-24 max-w-[1500px]">
-        <div className="w-[90%] mx-auto">
+        <div className="w-[90%]  mx-auto">
           <h1 className="text-4xl font-bold text-center mb-5">
             Get In Touch With Us
           </h1>
@@ -153,7 +153,7 @@ const ContactUs = () => {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-col md:flex-row justify-between items-start gap-5">
+        <div className="mt-10 flex flex-col mx-10 md:flex-row justify-between items-start gap-5">
           <div className="w-full md:w-[60%] flex flex-col gap-9">
             {contactDetails.map((item, index) => (
               <div key={index} className="flex items-start gap-3">

@@ -134,7 +134,7 @@ const AllProducts = () => {
       {/* Filter Section */}
       <div className="flex flex-col sm:flex-row w-full gap-6 mt-5">
         {/* Category Filter Section */}
-        <div className="flex flex-col w-full md:w-1/3 space-y-4 p-4 border border-gray-300 rounded-lg bg-white">
+        <div className="flex flex-col w-full md:w-1/3  p-4 border border-gray-300 rounded-lg bg-white">
           <h3 className="font-semibold text-lg text-gray-800">Category</h3>
           <div className="space-y-2">
             {categories.map((category) => (
@@ -191,7 +191,7 @@ const AllProducts = () => {
         <Skeleton />
       ) : (
         /* Product List */
-        <div className="w-full justify-center items-center grid md:grid-cols-3 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-7 h-auto justify-items-center md:justify-items-stretch">
+        <div className="w-full justify-center items-center grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-7 h-auto justify-items-center md:justify-items-stretch overflow-hidden">
           {currentProducts.length === 0 && selectedCategories.length > 0 ? (
             <p>No products found matching your filters.</p>
           ) : (
@@ -200,7 +200,7 @@ const AllProducts = () => {
                 key={product.slug.current}
                 href={`/products/${product.slug.current}`}
               >
-                <div className="flex flex-col justify-center items-center text-center max-w-[250px]">
+                <div className="flex flex-col  justify-center items-center text-center max-w-[250px]">
                   <div className="hover:scale-105 duration-300 ease-in-out cursor-pointer relative flex justify-center items-center w-64 h-64 object-center rounded-lg">
                     <Image
                       src={product.imageUrl}
@@ -209,7 +209,7 @@ const AllProducts = () => {
                       height="160"
                       quality={100}
                       loading="lazy"
-                      className="w-full h-full"
+                      className="w-full h-full object-center rounded-lg"
                     />
                     {product.badge && (
                       <div className="py-2 px-3 absolute top-2 left-0">

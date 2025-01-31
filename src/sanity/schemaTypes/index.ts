@@ -5,8 +5,10 @@ import { productSchema } from './products'
 import { contactMessage } from './contactmessage'
 import { categorySchema } from './categories'
 import { PopularBlogs } from './blogs'
+import { newsletterSchema } from './newsletter'
+import { orderSchema } from './order'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [HeroSection, CompanyLogos, productSchema, categorySchema, contactMessage, PopularBlogs]
+  types: [HeroSection, CompanyLogos, productSchema, categorySchema, contactMessage, PopularBlogs, newsletterSchema,orderSchema]
 }

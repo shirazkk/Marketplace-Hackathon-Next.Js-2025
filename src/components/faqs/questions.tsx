@@ -10,39 +10,63 @@ const Question = () => {
   const questions = [
     {
       id: 1,
-      question: "What types of chairs do you offer?",
+      question: "What types of furniture do you offer at Comforty?",
       answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quis modi ullam amet debitis libero veritatis enim repellat optio natus eum delectus deserunt, odit expedita eos molestiae ipsa totam quidem?",
+        "At Comforty, we specialize in high-quality furniture including ergonomic chairs, stylish sofas, wooden chairs, wing chairs, desk chairs, and park benches. Our collection is designed to provide comfort, style, and durability.",
     },
     {
       id: 2,
-      question: "How can we get in touch with you?",
+      question: "How can I place an order on Comforty?",
       answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quis modi ullam amet debitis libero veritatis enim repellat optio natus eum delectus deserunt, odit expedita eos molestiae ipsa totam quidem?",
+        "You can easily place an order by browsing our collection, selecting your preferred furniture, and proceeding to checkout. We offer secure online payments and multiple payment options, including credit/debit cards and online wallets.",
     },
     {
       id: 3,
-      question: "Do your chairs come with a warranty?",
+      question: "Do your chairs and sofas come with a warranty?",
       answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quis modi ullam amet debitis libero veritatis enim repellat optio natus eum delectus deserunt, odit expedita eos molestiae ipsa totam quidem?",
+        "Yes, all our products come with a standard 1-year warranty covering manufacturing defects. For more details, visit our Warranty Policy page.",
     },
     {
       id: 4,
-      question: "What will be delivered? And When?",
+      question: "How long does delivery take, and do you offer free shipping?",
       answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quis modi ullam amet debitis libero veritatis enim repellat optio natus eum delectus deserunt, odit expedita eos molestiae ipsa totam quidem?",
+        "Delivery times vary based on your location. Typically, orders are delivered within 5-7 business days. We also offer free shipping on select items and bulk orders.",
     },
     {
       id: 5,
-      question: "Can I try a chair before purchasing?",
+      question: "Can I return a product if I’m not satisfied?",
       answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quis modi ullam amet debitis libero veritatis enim repellat optio natus eum delectus deserunt, odit expedita eos molestiae ipsa totam quidem?",
+        "Yes, we offer a hassle-free return policy. If you're not satisfied with your purchase, you can return the product within 14 days. Please ensure the item is in its original condition. Read more on our Return Policy page.",
     },
     {
       id: 6,
-      question: "How do I clean and maintain my Comforty chair?",
+      question: "Do you offer installment plans or financing options?",
       answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quis modi ullam amet debitis libero veritatis enim repellat optio natus eum delectus deserunt, odit expedita eos molestiae ipsa totam quidem?",
+        "Yes! Comforty offers easy installment plans through partner financing services. You can choose a payment plan that suits your budget at checkout.",
+    },
+    {
+      id: 7,
+      question: "How do I clean and maintain my Comforty furniture?",
+      answer:
+        "Regular dusting and wiping with a damp cloth help maintain your furniture. For wooden chairs and tables, use a mild wood polish. For fabric sofas and chairs, vacuuming and spot-cleaning work best. Check our Furniture Care Guide for more details.",
+    },
+    {
+      id: 8,
+      question: "Do you have a physical showroom where I can try the furniture?",
+      answer:
+        "Currently, we operate as an online furniture store. However, we offer a detailed return policy to ensure customer satisfaction. Keep an eye on our website for upcoming showroom openings.",
+    },
+    {
+      id: 9,
+      question: "Can I customize my furniture order?",
+      answer:
+        "Yes, we offer customization on select furniture items, including size, color, and fabric. Contact our support team for personalized orders.",
+    },
+    {
+      id: 10,
+      question: "Is Comforty available internationally?",
+      answer:
+        "Currently, we deliver across Pakistan. International shipping is coming soon! Stay tuned for updates on our website.",
     },
   ];
 
@@ -50,11 +74,10 @@ const Question = () => {
     <div className="w-[90%] mx-auto py-10 max-w-[1500px]">
       <div>
         <h1 className="text-5xl font-bold text-center mb-8">
-          Questions Looks Here
+          Frequently Asked Questions
         </h1>
         <p className="text-center text-fourth mb-12">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the
+          Find answers to the most common questions about our furniture, delivery, payments, and policies.
         </p>
       </div>
 
@@ -62,7 +85,7 @@ const Question = () => {
         {questions.map((item) => (
           <div
             key={item.id}
-            className="bg-question  p-2 md:p-4 shadow-md rounded-lg"
+            className="bg-question p-2 md:p-4 shadow-md rounded-lg"
           >
             <Accordion type="single" collapsible>
               <AccordionItem value={`item-${item.id}`}>

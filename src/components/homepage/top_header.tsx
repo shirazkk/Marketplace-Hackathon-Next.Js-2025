@@ -14,12 +14,12 @@ const TopHeader = () => {
 
         {/* Right Side */}
         <div className="flex items-center space-x-4">
-          <select className="bg-transparent rounded p-1 focus:outline-none cursor-pointer">
-            <option className="bg-black" value="en">
-              Eng
+          <select className="bg-transparent rounded p-1 focus:outline-none cursor-pointer px-2">
+            <option className="bg-black text-white" value="en">
+              🇺🇸 English
             </option>
-            <option className="bg-black" value="ur">
-              Urdu
+            <option className="bg-black text-white" value="ur">
+              🇵🇰 اردو
             </option>
           </select>
           <div className=" cursor-pointer ">

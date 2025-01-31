@@ -1,16 +1,16 @@
 import Image from "next/image";
-import { FaFacebook, FaPinterest, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 import { RxInstagramLogo } from "react-icons/rx";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import Link from "next/link";
+import Newsletter from "./newsletter";
 
 const Footer = () => {
   return (
     <div className="w-screen bg-gray-50">
-      <div className="max-w-[1500px] mx-auto ">
-        <div className="w-full py-10 md:py-20 border-y-[1px]  border-gray-300 flex justify-center items-start">
+      <div className="max-w-[1500px] mx-auto">
+        <div className="w-full py-10 md:py-20 border-y border-gray-300 flex justify-center items-start">
           <div className="w-[95%] lg:w-[80%] md:w-[85%] flex flex-col lg:flex-row justify-between gap-10 items-start h-auto">
+            {/* Logo & Social Media */}
             <div className="flex flex-col gap-5 w-full lg:w-auto items-center lg:items-start">
               <Link
                 href="/"
@@ -18,10 +18,11 @@ const Footer = () => {
               >
                 <Image
                   src="/homepage/sofa_logo.png"
-                  alt="sofa-logo"
+                  alt="Sofa Logo"
                   width={45}
                   height={45}
                   quality={100}
+                  priority
                 />
                 <h1 className="text-2xl font-semibold">Comforty</h1>
               </Link>
@@ -29,101 +30,113 @@ const Footer = () => {
                 Vivamus tristique odio sit amet velit semper, <br /> eu posuere
                 turpis interdum. Cras egestas purus.
               </p>
+
+              {/* Social Media Icons */}
               <div className="flex gap-3 justify-center md:justify-start mt-2">
                 {[
-                  { Icon: FaFacebook },
-                  { Icon: FaTwitter },
-                  { Icon: RxInstagramLogo },
-                  { Icon: FaPinterest },
-                  { Icon: FaYoutube },
-                ].map(({ Icon }, index) => (
-                  <div
+                  {
+                    Icon: FaLinkedin,
+                    link: "https://www.linkedin.com/in/shirazkk/",
+                    title: "Visit our LinkedIn page",
+                  },
+                  {
+                    Icon: FaTwitter,
+                    link: "https://twitter.com/comforty",
+                    title: "Follow us on Twitter",
+                  },
+                  {
+                    Icon: RxInstagramLogo,
+                    link: "https://instagram.com/comforty",
+                    title: "Follow us on Instagram",
+                  },
+                  {
+                    Icon: FaGithub,
+                    link: "https://github.com/shirazkk",
+                    title: "Check out our Pinterest",
+                  },
+                  {
+                    Icon: FaYoutube,
+                    link: "https://youtube.com/comforty",
+                    title: "Subscribe to our YouTube channel",
+                  },
+                ].map(({ Icon, link, title }, index) => (
+                  <Link
                     key={index}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:scale-110 duration-300 ease-in-out cursor-pointer group relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 text-black transition-all"
+                    aria-label={title}
                   >
                     <Icon className="group-hover:text-second text-xl" />
-                    <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-second transition-all duration-300 cursor-pointer"></div>
-                  </div>
+                    <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-second transition-all duration-300"></div>
+                  </Link>
                 ))}
               </div>
             </div>
 
-            {[
-              {
-                title: "Category",
-                items: [
-                  "Sofa",
-                  "Armchair",
-                  "Wing Chair",
-                  "Desk Chair",
-                  "Wooden Chair",
-                  "Park Bench",
-                ],
-              },
-              {
-                title: "Support",
-                items: [
-                  "Help & Support",
-                  "Terms & Condition",
-                  "Privacy Policy",
-                  "Help",
-                ],
-              },
-            ].map((section, index) => (
-              <div
-                key={index}
-                className="flex flex-col gap-3 w-full lg:w-[150px] items-center lg:items-start"
-              >
-                <h1 className="uppercase text-fourth font-semibold">
-                  {section.title}
-                </h1>
-                {section.items.map((item, idx) => (
-                  <p
-                    key={idx}
-                    className="text-black hover:scale-105 duration-300 ease-in-out cursor-pointer hover:text-second hover:underline underline-offset-4"
-                  >
-                    {item}
-                  </p>
-                ))}
-              </div>
-            ))}
-
-            <div className="flex flex-col gap-3 w-full lg:w-[300px] items-center lg:items-start">
-              <h1 className="uppercase text-fourth font-semibold">
-                Newsletter
-              </h1>
-              <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
-                <Input
-                  type="email"
-                  placeholder="Your email"
-                  className="py-5 border border-gray-300 rounded-md w-full sm:w-2/3"
-                />
-                <Button className="text-white py-5 px-4 rounded-md bg-second hover:bg-hover w-full sm:w-1/3 mt-2 sm:mt-0">
-                  Subscribe
-                </Button>
-              </div>
-
-              <p className="text-sm text-gray-600 text-center md:text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />{" "}
-                Nullam tincidunt erat enim.
-              </p>
+            {/* Category Section */}
+            <div className="flex flex-col gap-3 w-full lg:w-[150px] items-center lg:items-start">
+              <h1 className="uppercase text-fourth font-semibold">Category</h1>
+              {[
+                "Wing Chairs",
+                "Desk Chairs",
+                "Wooden Chairs",
+                "Sofa",
+                "Armchair",
+                "Park Bench",
+              ].map((item, idx) => (
+                <Link
+                  key={idx}
+                  href={`/categories/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="text-black hover:scale-105 duration-300 ease-in-out cursor-pointer hover:text-second hover:underline underline-offset-4"
+                >
+                  {item}
+                </Link>
+              ))}
             </div>
+
+            {/* Support Section */}
+            <div className="flex flex-col gap-3 w-full lg:w-[150px] items-center lg:items-start">
+              <h1 className="uppercase text-fourth font-semibold">Support</h1>
+              {[
+                "Help & Support",
+                "Terms & Condition",
+                "Privacy Policy",
+                "Help",
+              ].map((item, idx) => (
+                <Link
+                  key={idx}
+                  href={`/support/${item
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")
+                    .replace(/&/g, "and")}`}
+                  className="text-black hover:scale-105 duration-300 ease-in-out cursor-pointer hover:text-second hover:underline underline-offset-4"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+
+            {/* Newsletter Section */}
+            <Newsletter />
           </div>
         </div>
 
+        {/* Footer Bottom Section */}
         <div className="w-full py-4 bg-gray-50">
           <div className="w-[90%] md:w-[80%] lg:w-[70%] mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 md:gap-0">
             <p className="text-fourth text-sm text-center md:text-left">
-              @ 2021 - Blogy - Designed & Developed by{" "}
+              © 2021 - Comforty - Designed & Developed by{" "}
               <span className="text-black font-semibold">Shiraz</span>
             </p>
             <Image
               src="/homepage/payment_methods.png"
-              alt="payment-methods"
-              width={200}
-              loading="lazy"
-              height={50}
+              alt="Payment Methods"
+              width={180}
+              height={40}
               quality={100}
+              loading="lazy"
             />
           </div>
         </div>

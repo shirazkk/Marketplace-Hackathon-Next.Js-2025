@@ -18,7 +18,7 @@ const MiddleHeader = () => {
           className="flex items-center space-x-2 hover:scale-105 duration-300 ease-in-out cursor-pointer"
         >
           <Image
-            src="/homepage/sofa_logo.png"
+            src="/sofa_logo.png"
             alt="sofa-logo"
             width={30}
             height={30}

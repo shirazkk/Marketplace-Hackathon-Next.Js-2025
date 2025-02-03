@@ -5,12 +5,14 @@ import { MdOutlineDelete } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const CartProducts = () => {
-  const { cartCount, cartDetails, removeItem, redirectToCheckout } =
+  const { cartCount, cartDetails, removeItem } =
     useShoppingCart();
   const [isLoading, setIsLoading] = useState(true);
   const [notification, setNotification] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (cartCount !== undefined) {
@@ -24,15 +26,11 @@ const CartProducts = () => {
     0
   );
 
-  const handleCheckout = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    try {
-      const response = await redirectToCheckout();
-      if (response.error) {
-        console.error("Stripe Checkout Error:", response.error.message);
-      }
-    } catch (error) {
-      console.error("Unexpected Error:", error);
+  const handleRedirect = () => {
+    if (cartDetails === undefined || cartCount === 0) {
+      alert("Add items to cart before placing order.");
+    } else {
+      router.push("/orderDetails"); // Replace with the target page
     }
   };
 
@@ -178,7 +176,7 @@ const CartProducts = () => {
             </div>
             <div className="w-full mt-2 hover:scale-105 duration-300 ease-in-out cursor-pointer">
               <Button
-                onClick={handleCheckout}
+                onClick={handleRedirect}
                 className="w-full py-7 rounded-3xl cursor-pointer text-white bg-second hover:bg-hover"
               >
                 Checkout

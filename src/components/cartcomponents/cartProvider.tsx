@@ -11,7 +11,6 @@ const CartProviderWrapper = ({ children }: { children: ReactNode }) => {
       cancelUrl="https://comfortyecommerce.vercel.app/stripe/failure"
       stripe={process.env.NEXT_PUBLIC_STRIPE_API_KEY || ""}
       currency="USD"
-      billingAddressCollection={true}
       shouldPersist={true}
       language="en-US"
     >

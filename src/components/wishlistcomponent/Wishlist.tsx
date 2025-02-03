@@ -53,7 +53,7 @@ const Wishlist = () => {
                   <Image
                     src={item.image}
                     alt={item.name}
-                    width={80}  
+                    width={80}
                     height={80}
                     quality={100}
                     className="h-20 w-20 object-cover rounded-lg"
@@ -73,8 +73,8 @@ const Wishlist = () => {
                   <FaTrash className="w-5 h-5" />
                 </Button>
                 <AddToCart
+                  id={item.id}
                   key={item.id}
-                  price_id={item.id}
                   name={item.name}
                   price={item.price}
                   currency="USD"

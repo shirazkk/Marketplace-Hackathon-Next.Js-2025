@@ -8,7 +8,7 @@ import Footer from "@/components/homepage/footer";
 import CartProviderWrapper from "@/components/cartcomponents/cartProvider";
 import { WishlistProvider } from "@/components/wishlistcomponent/wishlistcontext";
 
-
+// Load custom fonts
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -20,6 +20,7 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+// Metadata configuration for SEO and social media sharing
 export const metadata: Metadata = {
   title: "Comforty - Modern Furniture Store",
   description:
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/favicon.png",
+    apple: "/apple-touch-icon.png",
   },
   keywords: [
     "furniture store",
@@ -37,6 +38,9 @@ export const metadata: Metadata = {
     "home decor",
     "affordable furniture",
     "luxury furniture",
+    "best furniture deals",
+    "high-quality furniture",
+    "shop furniture online",
   ],
   openGraph: {
     title: "Comforty - Premium Furniture for Your Home",
@@ -46,26 +50,38 @@ export const metadata: Metadata = {
     siteName: "Comforty",
     images: [
       {
-        url: "/favicon.png",
+        url: "/og-image.jpg", // Ensure this exists in /public
         width: 1200,
         height: 630,
-        alt: "Comforty Logo",
+        alt: "Comforty Online Furniture Store",
       },
     ],
     type: "website",
   },
 };
 
+// Root layout component
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html className="scroll-smooth" lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        {/* ✅ Ensuring favicon loads properly */}
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.ico" />
+
+        {/* ✅ Additional SEO Meta Tags */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
+        <meta name="author" content="Comforty Team" />
+        <meta
+          name="robots"
+          content="index, follow"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

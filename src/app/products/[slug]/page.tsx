@@ -92,8 +92,8 @@ export default async function ProductPage({params}: {params: Promise<{ slug: str
 
                 {product.inventory > 0 ? (
                   <AddToCart
+                    id={product._id}
                     key={product._id}
-                    price_id={product.price_id || ""}
                     name={product.title}
                     description={product.description || ""}
                     price={product.price}

@@ -1,44 +1,43 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { urlFor } from "@/sanity/lib/image";
 import { ShoppingCart } from "lucide-react";
-import { useState } from "react";
+import { Button } from "../ui/button";
 import { useShoppingCart } from "use-shopping-cart";
+import { useState } from "react";
+import { urlFor } from "@/sanity/lib/image";
 
 export interface ProductCart {
+  id: string; // Sanity product ID
   name: string;
   description?: string;
   price: number;
   currency: string;
   image: string;
-  price_id: string;
 }
 
 export default function AddToCart({
+  id, // Sanity product ID
   currency,
   description,
   image,
   name,
   price,
-  price_id,
 }: ProductCart) {
   const { addItem } = useShoppingCart();
   const [notification, setNotification] = useState(false);
 
   const product = {
-    name: name,
-    description: description,
-    price: price,
-    currency: currency,
+    id,
+    name,
+    description,
+    price,
+    currency,
     image: urlFor(image).url(),
-    price_id: price_id,
   };
 
   const handleAddToCart = () => {
     addItem(product);
     setNotification(true);
 
-    // Reset the notification state after 3 seconds
     setTimeout(() => {
       setNotification(false);
     }, 2000);

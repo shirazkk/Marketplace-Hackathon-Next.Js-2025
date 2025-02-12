@@ -1,6 +1,6 @@
-import NewsletterAndInstagram from "@/components/productcom/newsletter";
-import React from "react";
-import OurProducts from "@/components/productcom/ourproducts";
+import NewsletterAndInstagram from "@/components/productcomonents/newsletter";
+import OurProducts from "@/components/productcomonents/ourproducts";
+
 
 const Products = () => {
   return (

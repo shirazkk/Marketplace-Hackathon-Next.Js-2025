@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Home } from "lucide-react";
+import { CheckCircle, ShoppingCart } from "lucide-react";
 
 // Success Page Component
 export default function Success() {
@@ -27,20 +27,10 @@ export default function Success() {
           </div>
 
           <div className="flex flex-col space-y-4">
-            {/* <Button asChild>
-              <Link
-                href=""
-                className="flex items-center justify-center"
-              >
-                <ShoppingCart className="mr-2 w-5 h-5" />
-               Generate Tracking Number
-              </Link>
-            </Button> */}
-
             <Button asChild>
-              <Link href="/" className="flex items-center justify-center">
-                <Home className="mr-2 w-5 h-5" />
-                Continue Shopping
+              <Link href="/shipment" className="flex items-center justify-center">
+                <ShoppingCart className="mr-2 w-5 h-5" />
+                Generate Tracking Number
               </Link>
             </Button>
           </div>

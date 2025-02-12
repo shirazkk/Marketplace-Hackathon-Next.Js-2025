@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import TopHeader from "@/components/homepage/top_header";
-import MiddleHeader from "@/components/homepage/middle_header";
-import NavHeader from "@/components/homepage/nav_header";
-import Footer from "@/components/homepage/footer";
 import CartProviderWrapper from "@/components/cartcomponents/cartProvider";
 import { WishlistProvider } from "@/components/wishlistcomponent/wishlistcontext";
+import { Analytics } from "@vercel/analytics/next";
+import TopHeader from "@/components/homecomponents/top_header";
+import MiddleHeader from "@/components/homecomponents/middle_header";
+import NavHeader from "@/components/homecomponents/nav_header";
+import Footer from "@/components/homecomponents/footer";
 
 // Load custom fonts
 const geistSans = localFont({
@@ -78,10 +79,7 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
         <meta name="author" content="Comforty Team" />
-        <meta
-          name="robots"
-          content="index, follow"
-        />
+        <meta name="robots" content="index, follow" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -92,6 +90,7 @@ export default function RootLayout({
             <MiddleHeader />
             <NavHeader />
             {children}
+            <Analytics />
             <Footer />
           </WishlistProvider>
         </CartProviderWrapper>

@@ -1,8 +1,9 @@
-import CompanyLogos from "@/components/homepage/company_logo";
-import FeatureProducts from "@/components/homepage/feature_products";
-import Hero from "@/components/homepage/hero";
-import GalleryProducts from "@/components/homepage/galleryproducts";
-import Categories from "@/components/homepage/categories";
+import Categories from "@/components/homecomponents/categories";
+import CompanyLogos from "@/components/homecomponents/company_logo";
+import FeatureProducts from "@/components/homecomponents/feature_products";
+import GalleryProducts from "@/components/homecomponents/galleryproducts";
+import Hero from "@/components/homecomponents/hero";
+
 
 export default function Home() {
   return (

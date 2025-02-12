@@ -4,6 +4,8 @@ import { Button } from "../ui/button";
 import { useShoppingCart } from "use-shopping-cart";
 import { useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export interface ProductCart {
   id: string; // Sanity product ID
@@ -53,12 +55,34 @@ export default function AddToCart({
         Add to Cart
       </Button>
 
-      {/* Notification Popup */}
-      {notification && (
-        <div className="py-4 px-8 fixed top-5 left-1/2 transform -translate-x-1/2 bg-green-100 dark:bg-green-900 border-l-4 border-green-500 dark:border-green-700 text-green-900 dark:text-green-100 p-2 rounded-lg flex items-center transition-all duration-500 ease-in-out">
-          <p>Item added to cart!</p>
-        </div>
-      )}
+      <AnimatePresence>
+        {notification && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-md"
+          >
+            <div className="bg-white rounded-lg shadow-xl p-4 flex items-center gap-3 border border-gray-100">
+              <div className="flex-shrink-0">
+                <div className="h-12 w-12 rounded-lg bg-indigo-100 flex items-center justify-center">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width="100"
+                    height="100"
+                    className="h-8 w-8 object-cover rounded"
+                  />
+                </div>
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-900">Added to Cart!</h3>
+                <p className="text-sm text-gray-600">{product.name}</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

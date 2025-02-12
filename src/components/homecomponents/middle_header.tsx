@@ -5,13 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useShoppingCart } from "use-shopping-cart";
 import { useWishlist } from "../wishlistcomponent/wishlistcontext";
+import SearchBar from "../searchproducts";
 
 const MiddleHeader = () => {
   const { cartCount } = useShoppingCart();
   const { wishlist } = useWishlist();
   return (
     <div className="bg-third py-4 px-4 ">
-      <div className=" w-full md:w-[70%] mx-auto flex md:justify-between justify-center items-center max-w-[1500px]">
+      <div className=" w-full md:w-[90%] lg:w-[70%] mx-auto flex md:justify-between justify-center items-center max-w-[1500px]">
         {/* Left Side */}
         <Link
           href="/"
@@ -26,9 +27,10 @@ const MiddleHeader = () => {
           />
           <h1 className="text-2xl font-semibold">Comforty</h1>
         </Link>
-
+       
         {/* Right Side */}
         <div className="md:flex hidden items-center space-x-4 ">
+        <SearchBar />
           <div className=" space-x-4 hover:scale-105 duration-300 ease-in-out cursor-pointer">
             <Link href="/wishlist">
               <Button className="bg-white px-9 text-black hover:bg-hover relative">

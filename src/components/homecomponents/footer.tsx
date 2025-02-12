@@ -127,7 +127,7 @@ const Footer = () => {
         <div className="w-full py-4 bg-gray-50">
           <div className="w-[90%] md:w-[80%] lg:w-[70%] mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 md:gap-0">
             <p className="text-fourth text-sm text-center md:text-left">
-              © 2021 - Comforty - Designed & Developed by{" "}
+              © 2025 - Comforty - Designed & Developed by{" "}
               <span className="text-black font-semibold">Shiraz</span>
             </p>
             <Image

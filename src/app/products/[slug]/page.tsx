@@ -3,11 +3,16 @@ import { Button } from "@/components/ui/button";
 import ProductNotFound from "@/components/productnotfound";
 import { Badge } from "@/components/ui/badge";
 import client from "@/sanity/lib/client";
-import AddToCart from "@/components/cartcomponents/addtocart";
-import AddToWishlist from "@/components/wishlistcomponent/wishlistbutton";
-import ReletedProducts from "@/components/shopcomponent/reletedproducts";
 
-export default async function ProductPage({params}: {params: Promise<{ slug: string }>}) {
+import AddToWishlist from "@/components/wishlistcomponent/wishlistbutton";
+import ReletedProducts from "@/components/shopcomponents/reletedproducts";
+import AddToCart from "@/components/cartcomponents/addtocart";
+
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   try {
     const singlePageQuery = `
       *[_type == "products" && slug.current == $slug][0]{
@@ -111,12 +116,11 @@ export default async function ProductPage({params}: {params: Promise<{ slug: str
         </div>
 
         {/* ReletedProducts Products */}
-    
-          <ReletedProducts
-            categoryId={product.category._id}
-            currentProductId={product._id}
-          />
-        
+
+        <ReletedProducts
+          categoryId={product.category._id}
+          currentProductId={product._id}
+        />
       </div>
     );
   } catch (error) {

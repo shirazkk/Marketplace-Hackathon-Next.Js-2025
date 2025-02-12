@@ -26,7 +26,7 @@ const AboutDetails = () => {
 
       <div className="2xl:w-[50%] xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-full w-full h-[300px] lg:h-full">
         <Image
-          src="/homepage/chair7.png"
+          src="/about/black_chair.jpg"
           alt="About Comforty"
           width="1920"
           height="1080"

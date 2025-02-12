@@ -1,10 +1,11 @@
-import AllBlogs from "@/components/blogscomponent/allblogs";
+
+import AllBlogs from "@/components/blogcomponent/allblogs";
 import React from "react";
 
 const BlogPage = () => {
   return (
     <div>
-      <AllBlogs />
+      <AllBlogs/>
     </div>
   );
 };

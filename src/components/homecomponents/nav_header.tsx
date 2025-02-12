@@ -5,6 +5,7 @@ import { Heart, Menu, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import { useShoppingCart } from "use-shopping-cart";
 import { useWishlist } from "../wishlistcomponent/wishlistcontext";
+import SearchBar from "../searchproducts";
 
 const NavHeader = () => {
   const { cartCount } = useShoppingCart();
@@ -15,7 +16,6 @@ const NavHeader = () => {
     { name: "Product", href: "/products" },
     { name: "Blogs", href: "/blogs" },
     { name: "About", href: "/aboutus" },
-    { name: "search", href: "/search" },
   ];
 
   return (
@@ -27,8 +27,9 @@ const NavHeader = () => {
             <SheetTrigger>
               <Menu className="w-6 h-6 text-black" />
             </SheetTrigger>
-            <SheetContent className="" side="left">
-              <nav>
+            <SheetContent side="left">
+              <nav className="mt-4">
+              <SearchBar />
                 {links.map((link) => (
                   <Link
                     className="hover:scale-110 duration-300 ease-in cursor-pointer"
@@ -41,6 +42,7 @@ const NavHeader = () => {
                   </Link>
                 ))}
               </nav>
+
               <div className="flex flex-col sm:flex-row  gap-3 sm:items-center sm:space-x-4 ">
                 <div className="space-x-4 hover:scale-105 duration-300 ease-in-out cursor-pointer">
                   <Link href="/wishlist">

@@ -2,8 +2,13 @@ import React from "react";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+interface ContentData {
+  title: string;
+  content: React.ReactNode
+}
+
 const SupportContent = ({ slug }: { slug: string }) => {
-  const contentData: Record<string, { title: string; content: JSX.Element }> = {
+  const contentData: Record<string, ContentData> = {
     /** 🔹 Help & Support Page */
     "help-and-support": {
       title: "Help & Support | Comforty Furniture Store",
@@ -11,8 +16,8 @@ const SupportContent = ({ slug }: { slug: string }) => {
         <>
           <p className="text-gray-600 leading-relaxed">
             Looking for assistance with your furniture purchase? Welcome to
-            Comforty&apos;s <strong>Help & Support</strong> page. We provide quick
-            solutions for orders, shipping, returns, and customer service
+            Comforty&apos;s <strong>Help & Support</strong> page. We provide
+            quick solutions for orders, shipping, returns, and customer service
             inquiries.
           </p>
 
@@ -65,7 +70,6 @@ const SupportContent = ({ slug }: { slug: string }) => {
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-second" />
-                {/* KEY CHANGE: Added &apos; */}
                 <span className="hover:text-second cursor-pointer">
                   123 Comforty Lane&apos; FC 12345
                 </span>
@@ -98,8 +102,8 @@ const SupportContent = ({ slug }: { slug: string }) => {
       content: (
         <>
           <p className="text-gray-600 leading-relaxed">
-            Welcome to Comforty&apos;s <strong>Terms & Conditions</strong> page. By
-            using our website, you agree to our policies and guidelines.
+            Welcome to Comforty&apos;s <strong>Terms & Conditions</strong> page.
+            By using our website, you agree to our policies and guidelines.
           </p>
 
           <h2 className="mt-6 text-xl font-semibold text-black">
@@ -226,7 +230,6 @@ const SupportContent = ({ slug }: { slug: string }) => {
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-second" />
-                {/* KEY CHANGE: Added &apos; */}
                 <span className="hover:text-second cursor-pointer">
                   123 Comforty Lane&apos; FC 12345
                 </span>

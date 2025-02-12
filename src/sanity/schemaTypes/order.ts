@@ -39,12 +39,32 @@ export default {
       title: 'Email',
       type: 'string',
     },
+
     {
-      name: 'cartItems',
-      title: 'Cart Items',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'products' } }],
+      name: "cartItems",
+      title: "Cart Items",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "cartItem",
+          fields: [
+            {
+              name: "product",
+              type: "reference",
+              to: [{ type: "products" }],
+              title: "Product",
+            },
+            {
+              name: "quantity",
+              type: "number",
+              title: "Quantity",
+            },
+          ],
+        },
+      ]
     },
+
     {
       name: 'total',
       title: 'Total Amount',

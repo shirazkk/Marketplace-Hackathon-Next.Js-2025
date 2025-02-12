@@ -1,6 +1,4 @@
 import client from "@/sanity/lib/client";
-import { groq } from "next-sanity";
-
 
 export const fetchHeroData = async () => {
   const query1 = `
@@ -26,29 +24,6 @@ export const fetchCompanyLogos = async () => {
 }
 
 
-
-
-// Fetch products based on search term
-export const searchProducts = async (term: string) => {
-  const query = groq`*[_type == "products" && title match $term]{
-    _id,
-    title,
-    slug,
-    price,
-    priceWithoutDiscount,
-    badge,
-    "imageUrl": image.asset->url,
-    category->{
-      _id,
-      title
-    },
-    description,
-    inventory,
-    tags
-  }`;
-  const params = { term: `${term}*` };
-  return client.fetch(query, params);
-};
 
 export const fetchBlogs = async () => {
   const query = `

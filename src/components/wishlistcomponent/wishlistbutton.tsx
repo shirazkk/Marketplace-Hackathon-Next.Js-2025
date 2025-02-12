@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useWishlist } from "./wishlistcontext";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 interface AddToWishlistProps {
   productId: string;
@@ -49,15 +51,36 @@ export default function AddToWishlist({
         Add to Wishlist
       </Button>
 
-      {/* Notification Popup at the top of the page */}
-      {notification && (
-        <div
-          role="alert"
-          className="py-4 px-8 fixed top-5 left-1/2 transform -translate-x-1/2 bg-green-100 dark:bg-green-900 border-l-4 border-green-500 dark:border-green-700 text-green-900 dark:text-green-100 p-2 rounded-lg flex items-center transition-all duration-500 ease-in-out"
-        >
-          <p>Item added to wishlist!</p>
-        </div>
-      )}
+      <AnimatePresence>
+        {notification && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-md"
+          >
+            <div className="bg-white rounded-lg shadow-xl p-4 flex items-center gap-3 border border-gray-100">
+              <div className="flex-shrink-0">
+                <div className="h-12 w-12 rounded-lg bg-indigo-100 flex items-center justify-center">
+                  <Image
+                    src={productImage}
+                    alt={productName}
+                    width="100"
+                    height="100"
+                    className="h-8 w-8 object-cover rounded"
+                  />
+                </div>
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-900">
+                  Added to Wishlist!
+                </h3>
+                <p className="text-sm text-gray-600">{productName}</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

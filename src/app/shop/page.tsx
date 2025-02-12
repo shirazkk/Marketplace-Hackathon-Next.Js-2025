@@ -1,4 +1,5 @@
-import AllProducts from "@/components/shopcomponent/allproducts";
+
+import AllProducts from "@/components/shopcomponents/allproducts";
 import React from "react";
 
 const Shop = () => {

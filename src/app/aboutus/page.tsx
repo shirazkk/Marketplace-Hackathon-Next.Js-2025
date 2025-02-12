@@ -1,6 +1,7 @@
-import AboutDetails from "@/components/about/aboutus";
-import Brand from "@/components/about/brand";
-import PopularProducts from "@/components/about/popular_products";
+
+import AboutDetails from "@/components/aboutcomponents/aboutus";
+import Brand from "@/components/aboutcomponents/brand";
+import PopularProducts from "@/components/aboutcomponents/popular_products";
 import React from "react";
 
 const AboutUs = () => {

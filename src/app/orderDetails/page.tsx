@@ -45,10 +45,27 @@ const OrderDetailsPage = () => {
     e.preventDefault();
     setLoading(true);
 
+    // Check if any field is empty
+    const isEmptyField = Object.values(customerInfo).some(
+      (value) => value.trim() === ""
+    );
+
+    if (isEmptyField) {
+      alert(
+        "Please fill in all the required fields before proceeding to checkout."
+      );
+      setLoading(false);
+      return; // Stop execution if validation fails
+    }
+
     try {
       const cartItems = Object.values(cartDetails || {}).map((product) => ({
-        _type: "reference",
-        _ref: product.id,
+        _type: "cartItem",
+        product: {
+          _type: "reference",
+          _ref: product.id,
+        },
+        quantity: product.quantity, // Store the quantity
       }));
 
       const orderData = {
@@ -96,6 +113,7 @@ const OrderDetailsPage = () => {
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
+                      type="text"
                       id="firstName"
                       name="firstName"
                       value={customerInfo.firstName}
@@ -107,6 +125,7 @@ const OrderDetailsPage = () => {
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name</Label>
                     <Input
+                      type="text"
                       id="lastName"
                       name="lastName"
                       value={customerInfo.lastName}

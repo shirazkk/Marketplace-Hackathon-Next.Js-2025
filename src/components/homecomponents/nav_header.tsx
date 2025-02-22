@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { useShoppingCart } from "use-shopping-cart";
 import { useWishlist } from "../wishlistcomponent/wishlistcontext";
 import SearchBar from "../searchproducts";
+import SignInButtons from "../signin/signup/buttons";
 
 const NavHeader = () => {
   const { cartCount } = useShoppingCart();
@@ -28,8 +29,12 @@ const NavHeader = () => {
               <Menu className="w-6 h-6 text-black" />
             </SheetTrigger>
             <SheetContent side="left">
+              <div className="w-full flex justify-start items-start my-4">
+                <SignInButtons />
+              </div>
+
               <nav className="mt-4">
-              <SearchBar />
+                <SearchBar />
                 {links.map((link) => (
                   <Link
                     className="hover:scale-110 duration-300 ease-in cursor-pointer"

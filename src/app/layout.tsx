@@ -8,7 +8,9 @@ import TopHeader from "@/components/homecomponents/top_header";
 import MiddleHeader from "@/components/homecomponents/middle_header";
 import NavHeader from "@/components/homecomponents/nav_header";
 import Footer from "@/components/homecomponents/footer";
-
+import {
+  ClerkProvider
+} from '@clerk/nextjs'
 // Load custom fonts
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -66,6 +68,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
+    <ClerkProvider>
     <html lang="en" className="scroll-smooth">
       <head>
         {/* ✅ Ensuring favicon loads properly */}
@@ -94,7 +97,9 @@ export default function RootLayout({
             <Footer />
           </WishlistProvider>
         </CartProviderWrapper>
+
       </body>
     </html>
+    </ClerkProvider>
   );
 }

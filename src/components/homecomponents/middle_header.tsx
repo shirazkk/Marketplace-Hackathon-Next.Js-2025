@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useShoppingCart } from "use-shopping-cart";
 import { useWishlist } from "../wishlistcomponent/wishlistcontext";
 import SearchBar from "../searchproducts";
+import SignInButtons from "../signin/signup/buttons";
 
 const MiddleHeader = () => {
   const { cartCount } = useShoppingCart();
@@ -27,10 +28,10 @@ const MiddleHeader = () => {
           />
           <h1 className="text-2xl font-semibold">Comforty</h1>
         </Link>
-       
+
         {/* Right Side */}
         <div className="md:flex hidden items-center space-x-4 ">
-        <SearchBar />
+          <SearchBar />
           <div className=" space-x-4 hover:scale-105 duration-300 ease-in-out cursor-pointer">
             <Link href="/wishlist">
               <Button className="bg-white px-9 text-black hover:bg-hover relative">
@@ -60,6 +61,9 @@ const MiddleHeader = () => {
                 </p>
               </Button>
             </Link>
+          </div>
+          <div>
+            <SignInButtons />
           </div>
         </div>
       </div>
